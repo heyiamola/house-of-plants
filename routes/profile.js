@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const User = require("../models/User.model");
-const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
+const BERLIN_BOROUGHS = require("../utils/consts/plant-giveaway-exchange.js");
 
 router.get("/:username/edit", isLoggedIn, (req, res) => {
   if (req.params.username !== req.session.user.username) {

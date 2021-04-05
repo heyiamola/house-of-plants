@@ -5,7 +5,7 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-   <title>{{title}}</title>
+   <title>House of plants</title>
    <link rel="stylesheet" href="/stylesheets/style.css" />
 </head>
 
@@ -15,6 +15,7 @@
       {{#if user}}
       <a href="/profile/{{user.username}}">My profile</a>
       <a href="/profile/{{user.username}}/edit">Edit my profile</a>
+      <a href="/plant/add">Add a plant</a>
       <a href="/auth/logout">Logout</a>
       {{else}}
       <a href="/auth/login">Login</a>

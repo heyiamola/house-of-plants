@@ -37,7 +37,7 @@ const userSchema = new Schema({
     type: String,
     default: "/images/default-profile-picture.png",
   },
-  // plants: [{ type: mongoose.Schema.Types.ObjectId, ref: "Plant" }],
+  plants: [{ type: Schema.Types.ObjectId, ref: "Plant" }],
 });
 
 const User = model("User", userSchema);
