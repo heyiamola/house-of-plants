@@ -6,14 +6,16 @@ const userSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    maxLength: 1000,
-    minLength: 4,
+    maxLength: 25,
+    minLength: 2,
     description: "The username for the user",
   },
-  password: { type: String, required: true, maxLength: 5000 },
+  password: { type: String, required: true },
   name: {
     type: String,
-    maxLength: 1000,
+    required: true,
+    minLength: 2,
+    maxLength: 25,
     description: "The users name, however they want to specify",
   },
   shortBio: {
@@ -23,12 +25,14 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
+    unique: true,
     required: true,
-    maxLength: 2000,
+    maxLength: 100,
     description: "The users email.",
   },
   berlinBorough: {
     type: String,
+    required: true,
     default: "Mitte",
     enum: BERLIN_BOROUGHS,
     description: "The users borough in Berlin.",
@@ -37,7 +41,9 @@ const userSchema = new Schema({
     type: String,
     default: "/images/default-profile-picture.png",
   },
-  plants: [{ type: Schema.Types.ObjectId, ref: "Plant" }],
+  usersPlants: [{ type: Schema.Types.ObjectId, ref: "Plant" }],
+  upcomingEvents: [],
+  createdEvents: [],
 });
 
 const User = model("User", userSchema);

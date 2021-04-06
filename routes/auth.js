@@ -22,8 +22,12 @@ router.get("/signup", shouldNotBeLoggedIn, (req, res) => {
   });
 });
 
+// router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
+//   const { username, password, email, name, location } = req.body;
+// });
+
 router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
-  const { username, password, email, location } = req.body;
+  const { username, password, email, name, location } = req.body;
 
   if (!username) {
     return res
@@ -32,7 +36,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   }
 
   if (password.length < 8) {
-    return res.status(400).render("signup", {
+    return res.status(400).render("auth/signup", {
       errorMessage: "Your password needs to be at least 8 characters long.",
     });
   }
@@ -51,7 +55,11 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   User.findOne({ username }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
+      return res
         .status(400)
+        .render("auth/signup", { errorMessage: "Username already taken" });
+    }
+    return bcrypt
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
       .then((hashedPassword) => {
@@ -60,6 +68,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
           username,
           password: hashedPassword,
           email,
+          name,
           berlinBorough: location,
         });
       })

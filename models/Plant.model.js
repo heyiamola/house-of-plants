@@ -1,23 +1,31 @@
 // To do:
 // - add seedling or full plant option
-// - add which inputs are strictly required
-// - review all default params
-// - change measurements (hight, length, pot diameter) into numerics (not strings)
-// - add spieces or plant API info?
+// - add spieces or plant API info? or botanical name?
 
 const { Schema, model } = require("mongoose");
 
-const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
-const PLANT_AVAILABILITY = require("../utils/consts/plant-availability.js");
-const PLANT_GIVEAWAY_EXCHANGE = require("../utils/consts/plant-giveaway-exchange");
-const PLANT_GROWING_LIGHT = require("../utils/consts/plant-growing-light");
-const PLANT_GROWING_LOCATION = require("../utils/consts/plant-growing-location");
-const PLANT_GROWING_TEMPERATURE = require("../utils/consts/plant-growing-temperature");
-const PLANT_GROWING_WATER = require("../utils/consts/plant-growing-water");
+const {
+  BERLIN_BOROUGHS,
+  PLANT_GROWING_TEMPERATURE,
+  PLANT_AVAILABILITY,
+  PLANT_GIVEAWAY_EXCHANGE,
+  PLANT_GROWING_LIGHT,
+  PLANT_GROWING_LOCATION,
+  PLANT_GROWING_WATER,
+} = require("../utils/consts");
+
+//const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
+//const PLANT_AVAILABILITY = require("../utils/consts/plant-availability.js");
+//const PLANT_GIVEAWAY_EXCHANGE = require("../utils/consts/plant-giveaway-exchange");
+//const PLANT_GROWING_LIGHT = require("../utils/consts/plant-growing-light");
+//const PLANT_GROWING_LOCATION = require("../utils/consts/plant-growing-location");
+//const PLANT_GROWING_TEMPERATURE = require("../utils/consts/plant-growing-temperature");
+//const PLANT_GROWING_WATER = require("../utils/consts/plant-growing-water");
 
 const plantSchema = new Schema({
   commonName: {
     type: String,
+    required: true,
     maxLength: 1000,
     description: "The name the plant is commonly known for.",
   },
@@ -29,17 +37,20 @@ const plantSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: "User" },
   description: {
     type: String,
+    required: true,
     maxLength: 1000,
     description: "A description of the plant",
   },
   availability: {
     type: String,
+    required: true,
     default: "available",
     enum: PLANT_AVAILABILITY,
     description: "If the plant is available.",
   },
   giveawayOrExchange: {
     type: String,
+    required: true,
     default: "giveaway",
     enum: PLANT_GIVEAWAY_EXCHANGE,
     description:
@@ -47,6 +58,7 @@ const plantSchema = new Schema({
   },
   berlinBorough: {
     type: String,
+    required: true,
     default: "Mitte",
     enum: BERLIN_BOROUGHS,
     description: "The plants location / borough in Berlin.",
@@ -82,13 +94,14 @@ const plantSchema = new Schema({
     default: "/images/default-plant-picture.png",
   },
   heightOrLength: {
-    type: String,
+    type: Number,
     description: "The height or length of the plant in centimeters.",
   },
   potDiameter: {
-    type: String,
+    type: Number,
     description: "The diameter of the plant pot in centimeters.",
   },
+  date: { type: Date, required: true },
 });
 
 const Plant = model("Plant", plantSchema);

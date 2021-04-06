@@ -7,7 +7,7 @@ const BERLIN_BOROUGHS = require("../utils/consts/plant-giveaway-exchange.js");
 
 router.get("/:username/edit", isLoggedIn, (req, res) => {
   if (req.params.username !== req.session.user.username) {
-    res.redirect("/");
+    return res.redirect("/");
   }
   res.render("profile/edit", { berlinBoroughs: BERLIN_BOROUGHS });
 });

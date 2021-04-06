@@ -45,6 +45,9 @@ app.use("/profile", profileRoutes);
 const plantRoutes = require("./routes/plant");
 app.use("/plant", plantRoutes);
 
+const eventRoutes = require("./routes/event");
+app.use("/event", eventRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
