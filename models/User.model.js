@@ -1,12 +1,41 @@
 const { Schema, model } = require("mongoose");
+const LOCATION_ENUM = require("../utils/consts");
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema({
   username: {
     type: String,
-    unique: true
+    unique: true,
+    required: true,
+    min: 3,
+    max: 25,
   },
-  password: String
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  password: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 25,
+  },
+  location: {
+    type: String,
+    required: true,
+    enum: LOCATION_ENUM,
+  },
+  image: {
+    type: String,
+    default: "",
+  },
+  bio: {},
+  availablePlants: [],
+  upcomingEvents: [],
 });
 
 const User = model("User", userSchema);
