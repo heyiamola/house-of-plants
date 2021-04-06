@@ -1,0 +1,58 @@
+{{!--
+To do:
+- Add option not to answer the optional questions (e.g. about growing conditions if not known)
+--}}
+
+<h1>Add a plant</h1>
+<form action="/plant/add" method="POST">
+  <label> Common name
+    <input type="text" name="commonName">
+  </label>
+  <br>
+  <label> Botanical name
+    <input type="text" name="botanicalName">
+  </label>
+  <br>
+  <label> Description
+    <input type="text" name="description">
+  </label>
+  <br>
+  <label> Location
+    <select name="location" id="location">
+      {{#each berlinBoroughs}}
+      <option value={{this}}>{{this}}</option>
+      {{/each}}
+    </select>
+  </label>
+
+  <br>
+
+  <h3>Growing conditions</h3>
+  <label> Light requirements
+    <select name="plantGrowingLight" id="plantGrowingLight">
+      {{#each plantGrowingLight}}
+      <option value={{this}}>{{this}}</option>
+      {{/each}}
+    </select>
+  </label>
+  <br>
+  <label> Water requirements
+    <select name="plantGrowingWater" id="plantGrowingWater">
+      {{#each plantGrowingWater}}
+      <option value={{this}}>{{this}}</option>
+      {{/each}}
+    </select>
+  </label>
+  <br>
+  <label> Temperature requirements
+    <select name="plantGrowingTemperature" id="plantGrowingTemperature">
+      {{#each plantGrowingTemperature}}
+      <option value={{this}}>{{this}}</option>
+      {{/each}}
+    </select>
+  </label>
+  <br>
+
+
+  <button type="submit">Submit</button>
+</form>

@@ -24,12 +24,26 @@ const capitalized = (string) =>
 
 app.locals.title = `${capitalized(projectName)} created with Ironlauncher`;
 
+// middleware to make user accessible form all hbs
+app.use((req, res, next) => {
+  if (req.session.user) {
+    res.locals.user = req.session.user;
+  }
+  next();
+});
+
 // 👇 Start handling routes here
 const index = require("./routes/index");
 app.use("/", index);
 
 const authRoutes = require("./routes/auth");
 app.use("/auth", authRoutes);
+
+const profileRoutes = require("./routes/profile");
+app.use("/profile", profileRoutes);
+
+const plantRoutes = require("./routes/plant");
+app.use("/plant", plantRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);

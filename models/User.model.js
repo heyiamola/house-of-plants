@@ -1,41 +1,43 @@
 const { Schema, model } = require("mongoose");
-const LOCATION_ENUM = require("../utils/consts");
+const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
 
 const userSchema = new Schema({
   username: {
     type: String,
-    unique: true,
     required: true,
-    min: 3,
-    max: 25,
+    unique: true,
+    maxLength: 1000,
+    minLength: 4,
+    description: "The username for the user",
+  },
+  password: { type: String, required: true, maxLength: 5000 },
+  name: {
+    type: String,
+    maxLength: 1000,
+    description: "The users name, however they want to specify",
+  },
+  shortBio: {
+    type: String,
+    maxLength: 2000,
+    description: "An optional short bio for the user.",
   },
   email: {
     type: String,
-    unique: true,
     required: true,
+    maxLength: 2000,
+    description: "The users email.",
   },
-  password: {
+  berlinBorough: {
     type: String,
-    required: true,
+    default: "Mitte",
+    enum: BERLIN_BOROUGHS,
+    description: "The users borough in Berlin.",
   },
-  name: {
+  profilePicture: {
     type: String,
-    required: true,
-    min: 1,
-    max: 25,
+    default: "/images/default-profile-picture.png",
   },
-  location: {
-    type: String,
-    required: true,
-    enum: LOCATION_ENUM,
-  },
-  image: {
-    type: String,
-    default: "",
-  },
-  bio: {},
-  availablePlants: [],
-  upcomingEvents: [],
+  plants: [{ type: Schema.Types.ObjectId, ref: "Plant" }],
 });
 
 const User = model("User", userSchema);
