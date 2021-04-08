@@ -9,7 +9,6 @@ router.get("/:username/edit", isLoggedIn, (req, res) => {
   if (req.params.username !== req.session.user.username) {
     return res.redirect("/");
   }
-  console.log({ BERLIN_BOROUGHS });
   res.render("profile/edit", { berlinBoroughs: BERLIN_BOROUGHS });
 });
 
