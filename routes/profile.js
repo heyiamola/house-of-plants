@@ -9,21 +9,24 @@ router.get("/:username/edit", isLoggedIn, (req, res) => {
   if (req.params.username !== req.session.user.username) {
     return res.redirect("/");
   }
-  res.render("profile/edit", { berlinBoroughs: BERLIN_BOROUGHS });
+  res.render("profile/edit", {
+    berlinBoroughs: BERLIN_BOROUGHS,
+    containsMap: true,
+  });
 });
 
 router.get("/:username", isLoggedIn, (req, res) => {
   User.findOne({ username: req.params.username }).then((userProfile) => {
-    res.render("profile/index", { userProfile });
+    res.render("profile/index", { userProfile, containsMap: true });
   });
 });
 
 router.post("/edit", isLoggedIn, (req, res) => {
-  const { name, shortBio, email, location } = req.body;
+  const { name, shortBio, email, location, latitude, longitude } = req.body;
 
   User.findByIdAndUpdate(
     req.session.user._id, // id of the user that was logged in
-    { name, shortBio, email, berlinBorough: location },
+    { name, shortBio, email, berlinBorough: location, latitude, longitude },
     { new: true }
   ).then((updatedUser) => {
     req.session.user = updatedUser;
