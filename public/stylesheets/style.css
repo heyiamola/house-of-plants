@@ -1,14 +1,42 @@
 body {
-  padding: 50px;
+  padding: 0;
+  margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
-  color: #00b7ff;
+  color: white;
 }
 
 h1 {
   color: 15px;
+}
+
+.nav-bar {
+  background-color: green;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-bar-links {
+  padding: 10px;
+  font-size: larger;
+}
+
+.nav-bar-links > a {
+  text-decoration: none;
+  padding: 5px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  background-color: lightgray;
 }
 
 /*# sourceMappingURL=style.css.map */

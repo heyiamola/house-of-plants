@@ -10,18 +10,30 @@
 </head>
 
 <body>
-   <nav>
-      <a href="/">Home</a>
-      {{#if user}}
-      <a href="/profile/{{user.username}}">My profile</a>
-      <a href="/profile/{{user.username}}/edit">Edit my profile</a>
-      <a href="/plant/add">Add a plant</a>
-      <a href="/auth/logout">Logout</a>
-      {{else}}
-      <a href="/auth/login">Login</a>
-      <a href="/auth/signup">Create an account</a>
-      {{/if}}
+   <nav class="nav-bar">
+      <div class="nav-bar-links">
+         <a href="/">Home</a>
+         <a href="/">Plants</a>
+         <a href="/">Events</a>
+      </div>
+      <div class="nav-bar-links">
+         {{#if user}}
+         <a href="/profile/{{user.username}}">My profile</a>
+         {{!-- <a href="/profile/{{user.username}}/edit">Edit my profile</a> --}}
+         <a href="/plant/add">Add a plant</a>
+         <a href="/auth/logout">Logout</a>
+         {{else}}
+         <a href="/auth/login">Login</a>
+         <a href="/auth/signup">Create an account</a>
+         {{/if}}
+      </div>
    </nav>
+
+   <footer>
+      <div class="newsletter-box">
+         <h3>Stay in touch with us</h3>
+      </div>
+   </footer>
 
 
    {{{body}}}

@@ -3,12 +3,13 @@ const express = require("express");
 const router = express.Router();
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const User = require("../models/User.model");
-const BERLIN_BOROUGHS = require("../utils/consts");
+const { BERLIN_BOROUGHS } = require("../utils/consts");
 
 router.get("/:username/edit", isLoggedIn, (req, res) => {
   if (req.params.username !== req.session.user.username) {
     return res.redirect("/");
   }
+  console.log({ BERLIN_BOROUGHS });
   res.render("profile/edit", { berlinBoroughs: BERLIN_BOROUGHS });
 });
 
