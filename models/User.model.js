@@ -37,6 +37,12 @@ const userSchema = new Schema({
     enum: BERLIN_BOROUGHS,
     description: "The users borough in Berlin.",
   },
+  latitude: {
+    type: Number,
+  },
+  longitude: {
+    type: Number,
+  },
   profilePicture: {
     type: String,
     default: "/images/default-profile-picture.png",

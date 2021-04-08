@@ -20,9 +20,16 @@
     </select>
   </label>
   <br>
-  <button type="submit">Edit</button>
+  <label> Latitude
+    <input type="floatNumber" name="latitude" id="latitude" value={{user.latitude}} readonly>
+  </label>
+  <label> Longitude
+    <input type="floatNumber" name="longitude" id="longitude" value={{user.longitude}} readonly>
+  </label>
+  <br>
+  <button type="submit">Save</button>
 </form>
 <div id='map'></div>
 
-<script src="/js/map.js">
+<script src="/js/map-edit.js">
 </script>
