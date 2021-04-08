@@ -68,9 +68,10 @@ footer {
 }
 
 .fd-buttons button {
-  width: 100px;
+  width: 120px;
   height: 30px;
   margin: 15px;
+  font-weight: bolder;
 }
 
 .fd-buttons a {
