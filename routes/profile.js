@@ -16,13 +16,16 @@ router.get("/:username/edit", isLoggedIn, (req, res) => {
 });
 
 router.get("/:username", isLoggedIn, (req, res) => {
-  User.findOne({ username: req.params.username }).then((userProfile) => {
-    res.render("profile/index", {
-      userProfile,
-      location: JSON.stringify(userProfile.location),
-      containsMap: true,
+  User.findOne({ username: req.params.username })
+    .populate("usersPlants")
+    .then((userProfile) => {
+      console.log(userProfile);
+      res.render("profile/index", {
+        userProfile,
+        location: JSON.stringify(userProfile.location),
+        containsMap: true,
+      });
     });
-  });
 });
 
 router.post("/edit", isLoggedIn, (req, res) => {
