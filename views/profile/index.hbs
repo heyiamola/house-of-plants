@@ -1,4 +1,6 @@
 <h1>{{userProfile.username}}</h1>
+<a href="/profile/{{userProfile.username}}/edit">Edit my profile</a>
+<br>
 <img src="{{userProfile.profilePicture}}" alt="Profile picture for user {{user.username}}">
 <br>
 Name: {{userProfile.name}}
@@ -9,12 +11,12 @@ Bio: {{userProfile.shortBio}}
 
 <h2>Plants from this user</h2>
 <ul class="user-plants">
-  <li></li>
+  {{#each userProfile.usersPlants}}
+  <li> {{this.commonName}}</li>
+  <li> <img src="{{this.picture}}" alt="Picture of {{this.commonName}}"> </li>
+  {{/each}}
 </ul>
-
 <br>
-<a href="/profile/{{userProfile.username}}/edit">Edit my profile</a>
-
 <script>
   const locationStr = `{{{location}}}`;
   const parsedLocationStr = JSON.parse(locationStr);
