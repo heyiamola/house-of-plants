@@ -28,9 +28,6 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
 }
 
 .nav-bar-links {
@@ -76,11 +73,10 @@ footer {
 
 .fd-body {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 50px;
+  position: relative;
 }
 
 .fd-search-container {
