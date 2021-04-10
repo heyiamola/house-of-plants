@@ -6,7 +6,7 @@ To do:
 <h1>Add a plant</h1>
 <div class="ap-main-container">
   <div class="ap-basic-info">
-    <form action="/plant/add" method="POST">
+    <form action="/plant/add" method="POST" enctype="multipart/form-data">
       <label> Common name
         <input type="text" name="commonName">
       </label>
@@ -41,6 +41,7 @@ To do:
   </div>
   <div class="ap-growing-info">
     <h3>Growing conditions</h3>
+    <form action="/plant/add" method="POST" enctype="multipart/form-data"></form>
     <label> Light
       <select name="growingLight" id="growingLight">
         {{#each plantGrowingLight}}
@@ -87,6 +88,8 @@ To do:
 </div>
 <div class="ap-upload-image">
   <h3>Upload images</h3>
+  <form action="/plant/add" method="POST" enctype="multipart/form-data"></form>
+  <input type="file" name="plant-image">
   <button type="submit" class="button-upload-image">Upload</button>
 </div>
 <button type="submit">Add plant</button>
