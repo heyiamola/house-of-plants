@@ -64,9 +64,6 @@ a {
   font-weight: bolder;
 }
 
-.nav-dropdown:hover ~ .nav-dropdown-menu {
-}
-
 /* footer on FD needs fixing */
 footer {
   position: fixed;

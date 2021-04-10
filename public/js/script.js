@@ -10,6 +10,7 @@ function start() {
   console.log("house-of-plants JS imported successfully!");
 
   const dropdown = document.querySelector(".nav-dropdown");
+  const dropdownMenu = document.querySelector(".nav-dropdown-menu");
   let dropdownMenuMagic;
   console.log("HELLO");
   dropdown?.addEventListener("mouseenter", (e) => {
@@ -24,7 +25,7 @@ function start() {
     dropdownMenuMagic = isUserLoggedIn;
     dropdownMenuMagic.classList.add("show-nav");
   });
-  dropdown?.addEventListener("mouseleave", () => {
+  dropdownMenu?.addEventListener("mouseleave", () => {
     console.log("BYE BYE BYE");
     if (!dropdownMenuMagic) {
       return;
