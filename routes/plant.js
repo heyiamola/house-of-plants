@@ -64,8 +64,10 @@ router.post("/add", isLoggedIn, (req, res) => {
 
 router.get("/view/:plantId", isLoggedIn, (req, res) => {
   Plant.findById(req.params.plantId)
+    .populate("owner")
     .then((foundPlant) => {
       let isPlantOwner;
+      // console.log("owner");
       // console.log(foundPlant);
       if (!foundPlant) {
         return res.redirect("/");
