@@ -5,7 +5,7 @@
 <h3>Location: {{foundPlant.location}}</h3>
 <p>{{foundPlant.availability}}</p>
 <p>{{foundPlant.giveawayOrExchange}}</p>
-<p>Posted by {{foundPlant.owner}} on {{foundPlant.date}}</p>
+<p>Posted by {{foundPlant.owner.username}} on {{foundPlant.date}}</p>
 
 <div class="pd-plant-description">
   <h2>Description</h2>
@@ -25,7 +25,6 @@
   <p>{{foundPlant.growingNotes}}</p>
 </div>
 
-{{!-- doesn't work correctly --}}
 {{#if isPlantOwner}}
 <button type="submit">Edit plant</button>
 {{else}}

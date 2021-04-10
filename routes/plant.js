@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const Plant = require("../models/Plant.model");
+const parser = require("../config/cloudinary");
 
 const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
 const PLANT_AVAILABILITY = require("../utils/consts/plant-availability.js");
@@ -24,7 +25,7 @@ router.get("/add", isLoggedIn, (req, res) => {
   });
 });
 
-router.post("/add", isLoggedIn, (req, res) => {
+router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
   const {
     commonName,
     botanicalName,
@@ -40,7 +41,6 @@ router.post("/add", isLoggedIn, (req, res) => {
     potDiameter,
     growingNotes,
   } = req.body;
-  // console.log(req.body);
   Plant.create({
     commonName,
     botanicalName,
@@ -64,18 +64,16 @@ router.post("/add", isLoggedIn, (req, res) => {
 
 router.get("/view/:plantId", isLoggedIn, (req, res) => {
   Plant.findById(req.params.plantId)
+    .populate("owner")
     .then((foundPlant) => {
       let isPlantOwner;
-      // console.log(foundPlant);
       if (!foundPlant) {
         return res.redirect("/");
       }
-      res.render("plant/view", { foundPlant });
-      console.log(foundPlant.owner);
-      console.log(req.session.user._id);
-      if (foundPlant.owner === req.session.user._id) {
+      if ((foundPlant.owner._id = req.session.user._id)) {
         isPlantOwner = true;
       }
+      res.render("plant/view", { foundPlant, isPlantOwner });
     })
     .catch((err) => console.log(err));
 });

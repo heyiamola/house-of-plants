@@ -5,8 +5,9 @@ To do:
 
 <h1>Add a plant</h1>
 <div class="ap-main-container">
-  <div class="ap-basic-info">
-    <form action="/plant/add" method="POST">
+  <form action="/plant/add" method="POST" enctype="multipart/form-data">
+    <div class="ap-basic-info">
+
       <label> Common name
         <input type="text" name="commonName">
       </label>
@@ -38,56 +39,58 @@ To do:
           {{/each}}
         </select>
       </label>
-  </div>
-  <div class="ap-growing-info">
-    <h3>Growing conditions</h3>
-    <label> Light
-      <select name="growingLight" id="growingLight">
-        {{#each plantGrowingLight}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-      </select>
-    </label>
-    <br>
-    <label> Water
-      <select name="growingWater" id="growingWater">
-        {{#each plantGrowingWater}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-      </select>
-    </label>
-    <br>
-    <label> Temperature
-      <select name="growingTemperature" id="growingTemperature">
-        {{#each plantGrowingTemperature}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-      </select>
-    </label>
-    <br>
-    <label>Plant location<select name="growingLocation" id="growingLocation">
-        {{#each plantGrowingLocation}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-      </select>
-    </label>
-    <br>
-    <label> Height
-      <input type="text" name="heightOrLength"> cm
-    </label>
-    <br>
-    <label> Pot diameter
-      <input type="text" name="potDiameter"> cm
-    </label>
-    <br>
-    <label> Additional info
-      <input type="text" name="growingNotes">
-    </label>
-  </div>
+    </div>
+    <div class="ap-growing-info">
+      <h3>Growing conditions</h3>
+
+      <label> Light
+        <select name="growingLight" id="growingLight">
+          {{#each plantGrowingLight}}
+          <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </label>
+      <br>
+      <label> Water
+        <select name="growingWater" id="growingWater">
+          {{#each plantGrowingWater}}
+          <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </label>
+      <br>
+      <label> Temperature
+        <select name="growingTemperature" id="growingTemperature">
+          {{#each plantGrowingTemperature}}
+          <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </label>
+      <br>
+      <label>Plant location<select name="growingLocation" id="growingLocation">
+          {{#each plantGrowingLocation}}
+          <option value="{{this}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </label>
+      <br>
+      <label> Height
+        <input type="text" name="heightOrLength"> cm
+      </label>
+      <br>
+      <label> Pot diameter
+        <input type="text" name="potDiameter"> cm
+      </label>
+      <br>
+      <label> Additional info
+        <input type="text" name="growingNotes">
+      </label>
+    </div>
+
+    <div class="ap-upload-image">
+      <h3>Upload images</h3>
+      <input type="file" name="plant-image">
+    </div>
+    <button type="submit">Add plant</button>
+  </form>
 </div>
-<div class="ap-upload-image">
-  <h3>Upload images</h3>
-  <button type="submit" class="button-upload-image">Upload</button>
-</div>
-<button type="submit">Add plant</button>
-</form>
