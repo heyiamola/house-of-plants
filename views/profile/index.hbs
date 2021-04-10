@@ -5,8 +5,16 @@ Name: {{userProfile.name}}
 <br>
 Bio: {{userProfile.shortBio}}
 <br>
-Location: {{userProfile.latitude}}, {{userProfile.longitude}}
-
+<div id='map'></div>
 
 <h2>Plants from this user</h2>
 Here we will put the plants the user has posted
+<br>
+<a href="/profile/{{userProfile.username}}/edit">Edit my profile</a>
+
+<script>
+  const locationStr = `{{{location}}}`;
+  const parsedLocationStr = JSON.parse(locationStr);
+</script>
+<script src="/js/map.js"></script>
+<script src="/js/map-view.js"></script>

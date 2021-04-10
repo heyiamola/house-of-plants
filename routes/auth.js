@@ -19,6 +19,7 @@ const isLoggedIn = require("../middlewares/isLoggedIn");
 router.get("/signup", shouldNotBeLoggedIn, (req, res) => {
   res.render("auth/signup", {
     berlinBoroughs: BERLIN_BOROUGHS,
+    containsMap: true,
   });
 });
 
@@ -27,7 +28,15 @@ router.get("/signup", shouldNotBeLoggedIn, (req, res) => {
 // });
 
 router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
-  const { username, password, email, name, location } = req.body;
+  const {
+    username,
+    password,
+    email,
+    name,
+    location,
+    latitude,
+    longitude,
+  } = req.body;
 
   if (!username) {
     return res
@@ -70,6 +79,10 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
           email,
           name,
           berlinBorough: location,
+          location: {
+            type: "Point",
+            coordinates: [longitude, latitude],
+          },
         });
       })
       .then((user) => {

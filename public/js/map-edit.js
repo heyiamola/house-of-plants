@@ -1,6 +1,3 @@
-mapboxgl.accessToken =
-  "pk.eyJ1IjoieWVsc3JlIiwiYSI6ImNrbjFva2I1OTB6ZnMydW8zN2kyODJrYjAifQ.F5PGE2phZtV6fFkEB0Zajg";
-
 editMap(getUserLatLng());
 
 function editMap(userLocation) {

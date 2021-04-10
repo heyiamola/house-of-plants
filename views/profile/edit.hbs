@@ -12,8 +12,8 @@
     <input type="email" name="email" value={{user.email}}>
   </label>
   <br>
-  <label> Location
-    <select name="location" id="location" selected={{user.berlinBorough}}>
+  <label> Borough
+    <select name="borough" id="borough" selected={{user.berlinBorough}}>
       {{#each berlinBoroughs}}
       <option value={{this}}>{{this}}</option>
       {{/each}}
@@ -21,15 +21,15 @@
   </label>
   <br>
   <label> Latitude
-    <input type="floatNumber" name="latitude" id="latitude" value={{user.latitude}} readonly>
+    <input type="floatNumber" name="latitude" id="latitude" value={{user.location.coordinates.[1]}} readonly>
   </label>
   <label> Longitude
-    <input type="floatNumber" name="longitude" id="longitude" value={{user.longitude}} readonly>
+    <input type="floatNumber" name="longitude" id="longitude" value={{user.location.coordinates.[0]}} readonly>
   </label>
   <br>
   <button type="submit">Save</button>
 </form>
 <div id='map'></div>
 
-<script src="/js/map-edit.js">
-</script>
+<script src="/js/map.js"></script>
+<script src="/js/map-edit.js"></script>

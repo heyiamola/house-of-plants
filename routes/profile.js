@@ -17,7 +17,11 @@ router.get("/:username/edit", isLoggedIn, (req, res) => {
 
 router.get("/:username", isLoggedIn, (req, res) => {
   User.findOne({ username: req.params.username }).then((userProfile) => {
-    res.render("profile/index", { userProfile, containsMap: true });
+    res.render("profile/index", {
+      userProfile,
+      location: JSON.stringify(userProfile.location),
+      containsMap: true,
+    });
   });
 });
 
@@ -26,7 +30,13 @@ router.post("/edit", isLoggedIn, (req, res) => {
 
   User.findByIdAndUpdate(
     req.session.user._id, // id of the user that was logged in
-    { name, shortBio, email, berlinBorough: location, latitude, longitude },
+    {
+      name,
+      shortBio,
+      email,
+      berlinBorough: location,
+      location: { coordinates: [longitude, latitude] },
+    },
     { new: true }
   ).then((updatedUser) => {
     req.session.user = updatedUser;
