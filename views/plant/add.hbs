@@ -4,55 +4,90 @@ To do:
 --}}
 
 <h1>Add a plant</h1>
-<form action="/plant/add" method="POST">
-  <label> Common name
-    <input type="text" name="commonName">
-  </label>
-  <br>
-  <label> Botanical name
-    <input type="text" name="botanicalName">
-  </label>
-  <br>
-  <label> Description
-    <input type="text" name="description">
-  </label>
-  <br>
-  <label> Location
-    <select name="location" id="location">
-      {{#each berlinBoroughs}}
-      <option value={{this}}>{{this}}</option>
-      {{/each}}
-    </select>
-  </label>
-
-  <br>
-
-  <h3>Growing conditions</h3>
-  <label> Light requirements
-    <select name="plantGrowingLight" id="plantGrowingLight">
-      {{#each plantGrowingLight}}
-      <option value={{this}}>{{this}}</option>
-      {{/each}}
-    </select>
-  </label>
-  <br>
-  <label> Water requirements
-    <select name="plantGrowingWater" id="plantGrowingWater">
-      {{#each plantGrowingWater}}
-      <option value={{this}}>{{this}}</option>
-      {{/each}}
-    </select>
-  </label>
-  <br>
-  <label> Temperature requirements
-    <select name="plantGrowingTemperature" id="plantGrowingTemperature">
-      {{#each plantGrowingTemperature}}
-      <option value={{this}}>{{this}}</option>
-      {{/each}}
-    </select>
-  </label>
-  <br>
-
-
-  <button type="submit">Submit</button>
+<div class="ap-main-container">
+  <div class="ap-basic-info">
+    <form action="/plant/add" method="POST">
+      <label> Common name
+        <input type="text" name="commonName">
+      </label>
+      <br>
+      <label> Botanical name
+        <input type="text" name="botanicalName">
+      </label>
+      <br>
+      <label> Description
+        <input type="text" name="description">
+      </label>
+      <br>
+      <label> Availability
+        {{#each plantAvailability}}
+        <input type="radio" name="availability" id="availability" value={{this}}>{{this}}</option>
+        {{/each}}
+      </label>
+      <br>
+      <label>Giveaway or exchange?
+        {{#each plantGiveawayExchange}}
+        <input type="radio" name="giveawayOrExchange" id="giveawayOrExchange" value={{this}}>{{this}}</option>
+        {{/each}}
+      </label>
+      <br>
+      <label> Location
+        <select name="location" id="location">
+          {{#each berlinBoroughs}}
+          <option value={{this}}>{{this}}</option>
+          {{/each}}
+        </select>
+      </label>
+  </div>
+  <div class="ap-growing-info">
+    <h3>Growing conditions</h3>
+    <label> Light
+      <select name="growingLight" id="growingLight">
+        {{#each plantGrowingLight}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <br>
+    <label> Water
+      <select name="growingWater" id="growingWater">
+        {{#each plantGrowingWater}}
+        <option value={{this}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <br>
+    <label> Temperature
+      <select name="growingTemperature" id="growingTemperature">
+        {{#each plantGrowingTemperature}}
+        <option value={{this}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <br>
+    <label>Plant location<select name="growingLocation" id="growingLocation">
+        {{#each plantGrowingLocation}}
+        <option value={{this}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <br>
+    <label> Height
+      <input type="text" name="heightOrLength"> cm
+    </label>
+    <br>
+    <label> Pot diameter
+      <input type="text" name="potDiameter"> cm
+    </label>
+    <br>
+    <label> Additional info
+      <input type="text" name="growingNotes">
+    </label>
+  </div>
+</div>
+<div class="ap-upload-image">
+  <h3>Upload images</h3>
+  <button type="submit" class="button-upload-image">Upload</button>
+</div>
+<button type="submit">Add plant</button>
 </form>

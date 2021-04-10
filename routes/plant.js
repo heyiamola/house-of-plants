@@ -24,6 +24,44 @@ router.get("/add", isLoggedIn, (req, res) => {
   });
 });
 
+router.post("/add", isLoggedIn, (req, res) => {
+  const {
+    commonName,
+    botanicalName,
+    description,
+    availability,
+    giveawayOrExchange,
+    location,
+    growingLight,
+    growingWater,
+    growingTemperature,
+    growingLocation,
+    heightOrLength,
+    potDiameter,
+    growingNotes,
+  } = req.body;
+  console.log(req.body);
+  Plant.create({
+    commonName,
+    botanicalName,
+    owner: req.session.user._id,
+    description,
+    availability,
+    giveawayOrExchange,
+    berlinBorough: location,
+    growingLight,
+    growingWater,
+    growingTemperature,
+    growingLocation,
+    heightOrLength,
+    potDiameter,
+    growingNotes,
+    date: new Date(),
+  })
+    .then((createdPlant) => res.redirect(`view/${createdPlant._id}`))
+    .catch((err) => console.log(err));
+});
+
 router.get("/view/:plantId", isLoggedIn, (req, res) => {
   Plant.findById(req.params.plantId).then((foundPlant) => {
     console.log(foundPlant);
@@ -32,20 +70,6 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
     }
     res.render("plant/view", { foundPlant });
   });
-});
-
-router.post("/add", isLoggedIn, (req, res) => {
-  const { commonName, botanicalName, description, location } = req.body;
-  // console.log(req.body);
-  Plant.create({
-    commonName,
-    botanicalName,
-    owner: req.session.user._id,
-    description,
-    berlinBorough: location,
-  })
-    .then((createdPlant) => res.redirect(`view/${createdPlant._id}`))
-    .catch((err) => console.log(err));
 });
 
 module.exports = router;
