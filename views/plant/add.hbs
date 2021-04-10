@@ -34,7 +34,7 @@ To do:
       <label> Location
         <select name="location" id="location">
           {{#each berlinBoroughs}}
-          <option value={{this}}>{{this}}</option>
+          <option value="{{this}}">{{this}}</option>
           {{/each}}
         </select>
       </label>
@@ -52,7 +52,7 @@ To do:
     <label> Water
       <select name="growingWater" id="growingWater">
         {{#each plantGrowingWater}}
-        <option value={{this}}>{{this}}</option>
+        <option value="{{this}}">{{this}}</option>
         {{/each}}
       </select>
     </label>
@@ -60,14 +60,14 @@ To do:
     <label> Temperature
       <select name="growingTemperature" id="growingTemperature">
         {{#each plantGrowingTemperature}}
-        <option value={{this}}>{{this}}</option>
+        <option value="{{this}}">{{this}}</option>
         {{/each}}
       </select>
     </label>
     <br>
     <label>Plant location<select name="growingLocation" id="growingLocation">
         {{#each plantGrowingLocation}}
-        <option value={{this}}>{{this}}</option>
+        <option value="{{this}}">{{this}}</option>
         {{/each}}
       </select>
     </label>
