@@ -41,8 +41,6 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     potDiameter,
     growingNotes,
   } = req.body;
-  // console.log(req.body);
-  console.log(req.file);
   Plant.create({
     commonName,
     botanicalName,
