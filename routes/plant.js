@@ -40,7 +40,7 @@ router.post("/add", isLoggedIn, (req, res) => {
     potDiameter,
     growingNotes,
   } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   Plant.create({
     commonName,
     botanicalName,
@@ -63,13 +63,21 @@ router.post("/add", isLoggedIn, (req, res) => {
 });
 
 router.get("/view/:plantId", isLoggedIn, (req, res) => {
-  Plant.findById(req.params.plantId).then((foundPlant) => {
-    console.log(foundPlant);
-    if (!foundPlant) {
-      return res.redirect("/");
-    }
-    res.render("plant/view", { foundPlant });
-  });
+  Plant.findById(req.params.plantId)
+    .then((foundPlant) => {
+      let isPlantOwner;
+      // console.log(foundPlant);
+      if (!foundPlant) {
+        return res.redirect("/");
+      }
+      res.render("plant/view", { foundPlant });
+      console.log(foundPlant.owner);
+      console.log(req.session.user._id);
+      if (foundPlant.owner === req.session.user._id) {
+        isPlantOwner = true;
+      }
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

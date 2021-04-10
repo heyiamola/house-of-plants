@@ -1,1 +1,33 @@
-<h1>View plant</h1>
+<h1>{{foundPlant.commonName}}</h1>
+{{#if foundPlant.botanicalName}}
+<h3>{{foundPlant.botanicalName}}</h3>
+{{/if}}
+<h3>Location: {{foundPlant.location}}</h3>
+<p>{{foundPlant.availability}}</p>
+<p>{{foundPlant.giveawayOrExchange}}</p>
+<p>Posted by {{foundPlant.owner}} on {{foundPlant.date}}</p>
+
+<div class="pd-plant-description">
+  <h2>Description</h2>
+  <p>{{foundPlant.description}}</p>
+</div>
+
+<div class="pd-plant-growing-info">
+  <h2>Growing info</h2>
+  <p>Light: {{foundPlant.growingLight}}</p>
+  <p>Water: {{foundPlant.growingTemperature}}</p>
+  <p>Temperature: {{foundPlant.growingTemperature}}</p>
+  <p>Plant location: {{foundPlant.growingLocation}}</p>
+  <p>Height: {{foundPlant.heightOrLength}}</p>
+  <p>Pot diameter: {{foundPlant.potDiameter}}</p>
+
+  <h3>Growing notes</h3>
+  <p>{{foundPlant.growingNotes}}</p>
+</div>
+
+{{!-- doesn't work correctly --}}
+{{#if isPlantOwner}}
+<button type="submit">Edit plant</button>
+{{else}}
+<button type="submit">Contact user</button>
+{{/if}}
