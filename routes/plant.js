@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 const isLoggedIn = require("../middlewares/isLoggedIn");
 const Plant = require("../models/Plant.model");
+const User = require("../models/User.model");
+
 const parser = require("../config/cloudinary");
 
 const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
@@ -58,8 +60,23 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     growingNotes,
     date: new Date(),
   })
-    .then((createdPlant) => res.redirect(`view/${createdPlant._id}`))
-    .catch((err) => console.log(err));
+    .then((createdPlant) => {
+      User.findByIdAndUpdate(
+        req.session.user._id,
+        {
+          $push: { usersPlants: createdPlant._id },
+        },
+        { new: true }
+      );
+      return createdPlant;
+    })
+    .then((createdPlant) => {
+      res.redirect(`view/${createdPlant._id}`);
+    })
+    .catch((err) => {
+      res.redirect("/", { errorMessage: err });
+      console.log(err);
+    });
 });
 
 router.get("/view/:plantId", isLoggedIn, (req, res) => {

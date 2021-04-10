@@ -15,6 +15,11 @@ router.get("/:username/edit", isLoggedIn, (req, res) => {
   });
 });
 
+// add a route for if you go to /profile/, then you will get redirected to your own profile
+router.get("/", isLoggedIn, (req, res) => {
+  res.redirect(`${req.session.user.username}`);
+});
+
 router.get("/:username", isLoggedIn, (req, res) => {
   User.findOne({ username: req.params.username })
     .populate("usersPlants")
