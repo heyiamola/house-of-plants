@@ -159,23 +159,31 @@ router.post("/:plantId/edit", isLoggedIn, (req, res) => {
   // });
 });
 
-// router.get("/:plantId/delete", isLoggedIn, (req, res) => {
-//   Plant.findById(req.params.plantId)
-//     .populate("owner")
-//     .then((foundPlant) => {
-//       if (!foundPlant) {
-//         return res.redirect("/");
-//       }
-//       if ((foundPlant.owner._id = req.session.user._id)) {
-//         Plant.findByIdAndDelete(foundPlant._id).then(() => {
-//           User.findByIdAndDelete(foundPlant.owner._id, {
-//             $pull: { userPlants: foundPlant._id },
-//           });
-//         });
-//         res.render("plant/delete", { foundPlant });
-//       }
-//     })
-//     .catch((err) => cosnole.log(err));
-// });
+router.get("/:plantId/delete", isLoggedIn, (req, res) => {
+  Plant.findById(req.params.plantId)
+    .populate("owner")
+    .then((foundPlant) => {
+      if (!foundPlant) {
+        return res.redirect("/");
+      }
+      if ((foundPlant.owner._id = req.session.user._id)) {
+        console.log(foundPlant.owner.usersPlants);
+        console.log(foundPlant._id);
+        User.findByIdAndUpdate(
+          foundPlant.owner._id,
+          {
+            $pull: { usersPlants: foundPlant._id },
+          },
+          { new: true }
+        ).then(() => {
+          console.log(foundPlant.owner.usersPlants);
+          Plant.findByIdAndDelete(foundPlant._id).then(() => {
+            return res.render("plant/delete", { foundPlant });
+          });
+        });
+      }
+    })
+    .catch((err) => cosnole.log(err));
+});
 
 module.exports = router;
