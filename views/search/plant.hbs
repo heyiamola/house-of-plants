@@ -1,2 +1,82 @@
 <h1>Search for a plant</h1>
+<form action="/search/plant" method="POST">
+  <div class="ap-basic-info">
+    <h2>Basic search</h2>
+    <label> Common name
+      <input type="text" name="commonName">
+    </label>
+    <h2>Advanced criteria</h2>
+    <label> Botanical name
+      <input type="text" name="botanicalName">
+    </label>
+    <br>
+    <label> Availability </label>
+    {{#each plantAvailability}}
+    <input type="checkbox" name="availability-{{this}}" id="availability-{{this}}" value={{this}}>
+    <label for="availability-{{this}}">{{this}}</label>
+    {{/each}}
+    <br>
+    <label>Giveaway or exchange?
+      {{#each plantGiveawayExchange}}
+      <input type="checkbox" name="giveawayOrExchange-{{this}}" id="giveawayOrExchange-{{this}}" value={{this}}>
+      <label for="giveawayOrExchange-{{this}}">{{this}}</label>
+      {{/each}}
+    </label>
+    <br>
+    <label> Location
+      <select name="location" id="location">
+        {{#each berlinBoroughs}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+  </div>
+  <div class="ap-growing-info">
+    <h3>Growing conditions</h3>
+
+    <label> Light </label>
+    {{#each plantGrowingLight}}
+    <input type="checkbox" name="plantGrowingLight-{{this}}" id="plantGrowingLight-{{this}}" value={{this}}>
+    <label for="plantGrowingLight-{{this}}">{{this}}</label>
+    {{/each}}
+    <br>
+    <label> Water </label>
+    {{#each plantGrowingWater}}
+    <input type="checkbox" name="plantGrowingWater-{{this}}" id="plantGrowingWater-{{this}}" value={{this}}>
+    <label for="plantGrowingWater-{{this}}">{{this}}</label>
+    {{/each}}
+    </label>
+    <br>
+    <label> Temperature </label>
+    {{#each plantGrowingTemperature}}
+    <input type="checkbox" name="growingTemperature-{{this}}" id="growingTemperature-{{this}}" value={{this}}>
+    <label for="growingTemperature-{{this}}">{{this}}</label> {{/each}}
+    <br>
+    <label>Plant location </label>
+    {{#each plantGrowingLocation}}
+    <input type="checkbox" name="growingLocation-{{this}}" id="growingLocation-{{this}}" value={{this}}>
+    <label for="growingLocation-{{this}}">{{this}}</label>
+    {{/each}}
+    </label>
+    <br>
+    <label> Height
+      <input type="text" name="heightOrLength"> cm
+    </label>
+    <br>
+    <label> Pot diameter
+      <input type="text" name="potDiameter"> cm
+    </label>
+    <br>
+  </div>
+  <button type="submit">Search</button>
+</form>
+
 <h2>View all plants</h2>
+<ul>
+  {{#each foundPlants}}
+  <li>
+    <div>{{this.commonName}}</div>
+    <div><img src="{{this.picture}}" alt="Picture of {{this.commonName}}"> </div>
+  </li>
+  {{/each}}
+</ul>
