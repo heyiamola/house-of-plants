@@ -48,6 +48,9 @@ app.use("/plant", plantRoutes);
 const eventRoutes = require("./routes/event");
 app.use("/event", eventRoutes);
 
+const searchRoutes = require("./routes/search");
+app.use("/search", searchRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
