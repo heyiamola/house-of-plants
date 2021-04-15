@@ -8,6 +8,18 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+.body-website {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  margin-top: 50px;
+  /* z-index: -1; */
+  flex: 1;
+}
+
 h1 {
   font-size: 54px;
   color: black;
@@ -52,6 +64,14 @@ a {
   display: none;
 }
 
+.nav-dropdown-menu li {
+  padding: 10px;
+}
+
+.nav-dropdown-menu a {
+  color: white;
+}
+
 .show-nav {
   display: flex;
   flex-direction: column;
@@ -62,7 +82,6 @@ a {
   top: 50px;
   right: 0;
   font-size: larger;
-  font-weight: bolder;
   z-index: 1;
 }
 
@@ -71,18 +90,6 @@ footer {
   height: 50px;
   background-color: lightgray;
   padding: 10px;
-}
-
-.body-website {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.container {
-  margin-top: 50px;
-  z-index: -1;
-  flex: 1;
 }
 
 .fd-body {
@@ -132,6 +139,7 @@ footer {
   display: flex;
   justify-content: space-around;
 }
+
 .fd-cards-container img {
   width: 200px;
   height: 150px;
