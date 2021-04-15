@@ -115,49 +115,53 @@ router.get("/:plantId/edit", isLoggedIn, (req, res) => {
     .catch((err) => console.log(err));
 });
 
-//FILIPE
-router.post("/:plantId/edit", isLoggedIn, (req, res) => {
-  console.log(req.body);
-  const {
-    commonName,
-    botanicalName,
-    description,
-    availability,
-    giveawayOrExchange,
-    location,
-    growingLight,
-    growingWater,
-    growingTemperature,
-    growingLocation,
-    heightOrLength,
-    potDiameter,
-    growingNotes,
-  } = req.body;
-
-  // console.log(req.session);
-  // Plant.findByIdAndUpdate(
-  //   req.session.plant._id,
-  //   {
-  //     commonName,
-  //     botanicalName,
-  //     description,
-  //     availability,
-  //     giveawayOrExchange,
-  //     location: berlinBorough,
-  //     growingLight,
-  //     growingWater,
-  //     growingLocation,
-  //     growingTemperature,
-  //     heightOrLength,
-  //     potDiameter,
-  //     growingNotes,
-  //   },
-  //   { new: true }
-  // ).then((updatedPlant) => {
-  //   req.session.plant = updatedPlant;
-  //   res.redirect(`/view/${updatedPlant._id}`);
-  // });
-});
+router.post(
+  "/:plantId/edit",
+  isLoggedIn,
+  parser.single("plant-image"),
+  (req, res) => {
+    const {
+      commonName,
+      botanicalName,
+      description,
+      availability,
+      giveawayOrExchange,
+      location,
+      growingLight,
+      growingWater,
+      growingTemperature,
+      growingLocation,
+      heightOrLength,
+      potDiameter,
+      growingNotes,
+      picture,
+    } = req.body;
+    Plant.findByIdAndUpdate(
+      req.params.plantId,
+      {
+        commonName,
+        botanicalName,
+        description,
+        availability,
+        giveawayOrExchange,
+        berlinBorough: location,
+        growingLight,
+        growingWater,
+        growingLocation,
+        growingTemperature,
+        heightOrLength,
+        potDiameter,
+        growingNotes,
+        picture,
+      },
+      { new: true }
+    )
+      .then((updatedPlant) => {
+        return res.redirect(`/plant/view/${updatedPlant._id}`);
+      })
+      .catch((err) => console.log(err));
+  }
+);
 
 router.get("/:plantId/delete", isLoggedIn, (req, res) => {
   Plant.findById(req.params.plantId)
