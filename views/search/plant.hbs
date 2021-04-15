@@ -2,9 +2,19 @@
 <form action="/search/plant" method="POST">
   <div class="ap-basic-info">
     <h2>Basic search</h2>
-    <label> Common name
-      <input type="text" name="commonName">
+    <label> Seach by plant
+      <input type="text" name="name" id="name" placeholder="Search a plant by name">
     </label>
+    <label> Location
+      <select name="location" id="location">
+        <option value="all">Search all locations</option>
+        {{#each berlinBoroughs}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+  </div>
+  {{!-- <div class="ap-growing-info">
     <h2>Advanced criteria</h2>
     <label> Botanical name
       <input type="text" name="botanicalName">
@@ -23,15 +33,6 @@
       {{/each}}
     </label>
     <br>
-    <label> Location
-      <select name="location" id="location">
-        {{#each berlinBoroughs}}
-        <option value="{{this}}">{{this}}</option>
-        {{/each}}
-      </select>
-    </label>
-  </div>
-  <div class="ap-growing-info">
     <h3>Growing conditions</h3>
 
     <label> Light </label>
@@ -59,19 +60,11 @@
     {{/each}}
     </label>
     <br>
-    <label> Height
-      <input type="text" name="heightOrLength"> cm
-    </label>
-    <br>
-    <label> Pot diameter
-      <input type="text" name="potDiameter"> cm
-    </label>
-    <br>
-  </div>
+  </div> --}}
   <button type="submit">Search</button>
 </form>
 
-<h2>View all plants</h2>
+<h2>Results</h2>
 <ul>
   {{#each foundPlants}}
   <li>
