@@ -24,6 +24,7 @@ router.get("/add", isLoggedIn, (req, res) => {
     plantGrowingLocation: PLANT_GROWING_LOCATION,
     plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
     plantGrowingWater: PLANT_GROWING_WATER,
+    containsMap: true,
   });
 });
 
@@ -34,7 +35,6 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     description,
     availability,
     giveawayOrExchange,
-    location,
     growingLight,
     growingWater,
     growingTemperature,
@@ -42,7 +42,11 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     heightOrLength,
     potDiameter,
     growingNotes,
+    berlinBorough,
+    latitude,
+    longitude,
   } = req.body;
+  console.log(req.body);
   Plant.create({
     commonName,
     botanicalName,
@@ -50,7 +54,7 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     description,
     availability,
     giveawayOrExchange,
-    berlinBorough: location,
+    berlinBorough: berlinBorough,
     growingLight,
     growingWater,
     growingTemperature,
@@ -59,6 +63,10 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     potDiameter,
     growingNotes,
     date: new Date(),
+    location: {
+      type: "Point",
+      coordinates: [longitude, latitude],
+    },
   })
     .then((createdPlant) => {
       User.findByIdAndUpdate(
@@ -90,7 +98,12 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
       if ((foundPlant.owner._id = req.session.user._id)) {
         isPlantOwner = true;
       }
-      res.render("plant/view", { foundPlant, isPlantOwner });
+      res.render("plant/view", {
+        location: JSON.stringify(foundPlant.location),
+        foundPlant,
+        isPlantOwner,
+        containsMap: true,
+      });
     })
     .catch((err) => console.log(err));
 });
@@ -103,6 +116,7 @@ router.get("/:plantId/edit", isLoggedIn, (req, res) => {
       }
       res.render("plant/edit", {
         foundPlant,
+        location: JSON.stringify(foundPlant.location),
         berlinBoroughs: BERLIN_BOROUGHS,
         plantAvailability: PLANT_AVAILABILITY,
         plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
@@ -110,6 +124,7 @@ router.get("/:plantId/edit", isLoggedIn, (req, res) => {
         plantGrowingLocation: PLANT_GROWING_LOCATION,
         plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
         plantGrowingWater: PLANT_GROWING_WATER,
+        containsMap: true,
       });
     })
     .catch((err) => console.log(err));
@@ -126,7 +141,7 @@ router.post(
       description,
       availability,
       giveawayOrExchange,
-      location,
+      berlinBorough,
       growingLight,
       growingWater,
       growingTemperature,
@@ -135,6 +150,8 @@ router.post(
       potDiameter,
       growingNotes,
       picture,
+      latitude,
+      longitude,
     } = req.body;
     Plant.findByIdAndUpdate(
       req.params.plantId,
@@ -144,7 +161,7 @@ router.post(
         description,
         availability,
         giveawayOrExchange,
-        berlinBorough: location,
+        berlinBorough,
         growingLight,
         growingWater,
         growingLocation,
@@ -153,6 +170,10 @@ router.post(
         potDiameter,
         growingNotes,
         picture,
+        location: {
+          type: "Point",
+          coordinates: [longitude, latitude],
+        },
       },
       { new: true }
     )

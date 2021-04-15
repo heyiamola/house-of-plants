@@ -27,5 +27,6 @@ function getUserLatLng() {
   userLat = document.getElementById("latitude").value;
   userLng = document.getElementById("longitude").value;
   let userLocation = [userLng, userLat];
+  console.log(userLocation);
   return userLocation;
 }

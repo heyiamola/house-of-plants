@@ -2,7 +2,7 @@
 {{#if foundPlant.botanicalName}}
 <h3>{{foundPlant.botanicalName}}</h3>
 {{/if}}
-<h3>Location: {{foundPlant.location}}</h3>
+<h3>Location: {{foundPlant.berlinBorough}}</h3>
 <p>{{foundPlant.availability}}</p>
 <p>{{foundPlant.giveawayOrExchange}}</p>
 <p>Posted by {{foundPlant.owner.username}} on {{foundPlant.date}}</p>
@@ -24,6 +24,8 @@
   <h3>Growing notes</h3>
   <p>{{foundPlant.growingNotes}}</p>
 </div>
+<div id='map'></div>
+
 
 {{#if isPlantOwner}}
 <button type="submit"><a href="/plant/{{foundPlant._id}}/edit">Edit plant</a></button>
@@ -31,3 +33,9 @@
 {{else}}
 <button type="submit">Contact user</button>
 {{/if}}
+<script>
+  const locationStr = `{{{location}}}`;
+  const parsedLocationStr = JSON.parse(locationStr);
+</script>
+<script src="/js/map.js"></script>
+<script src="/js/map-view.js"></script>

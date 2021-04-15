@@ -102,6 +102,17 @@ const plantSchema = new Schema({
     description: "The diameter of the plant pot in centimeters.",
   },
   date: { type: Date, required: true },
+  location: {
+    type: {
+      type: String,
+      enum: ["Point"],
+      // required: true,
+    },
+    coordinates: {
+      type: [Number],
+      // required: true,
+    },
+  },
 });
 
 const Plant = model("Plant", plantSchema);
