@@ -48,12 +48,6 @@ a {
   color: white;
 }
 
-.container {
-  margin-top: 50px;
-  z-index: -1;
-  flex: 1;
-}
-
 .nav-dropdown-menu {
   display: none;
 }
@@ -72,10 +66,7 @@ a {
   z-index: 1;
 }
 
-/* footer on FD needs fixing */
 footer {
-  /* position: fixed; */
-  /* bottom: 0; */
   width: 100%;
   height: 50px;
   background-color: lightgray;
@@ -86,6 +77,12 @@ footer {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+
+.container {
+  margin-top: 50px;
+  z-index: -1;
+  flex: 1;
 }
 
 .fd-body {
