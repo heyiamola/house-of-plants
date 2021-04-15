@@ -32,13 +32,21 @@ To do:
         {{/each}}
       </label>
       <br>
-      <label> Location
-        <select name="location" id="location">
+      <label> Berlin Borough
+        <select name="berlinBorough" id="berlinBorough">
           {{#each berlinBoroughs}}
           <option value="{{this}}">{{this}}</option>
           {{/each}}
         </select>
       </label>
+      <br>
+      <label> Latitude
+        <input type="floatNumber" name="latitude" id="latitude" readonly>
+      </label>
+      <label> Longitude
+        <input type="floatNumber" name="longitude" id="longitude" readonly>
+      </label>
+      <br>
     </div>
     <div class="ap-growing-info">
       <h3>Growing conditions</h3>
@@ -87,10 +95,15 @@ To do:
       </label>
     </div>
 
+
     <div class="ap-upload-image">
       <h3>Upload images</h3>
       <input type="file" name="plant-image">
     </div>
     <button type="submit">Add plant</button>
   </form>
+  Select your location on the map below:
+  <div id='map'></div>
 </div>
+<script src="/js/map.js"></script>
+<script src="/js/map-add.js"></script>

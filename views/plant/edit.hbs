@@ -35,12 +35,21 @@ To do:
       </label>
       <br>
       <label> Location
-        <select name="location" id="location">
+        <select name="berlinBorough" id="berlinBorough">
           {{#each berlinBoroughs}}
-          <option value="{{this}}" checked={{foundPlant.location}}>{{this}}</option>
+          <option value="{{this}}" checked={{foundPlant.berlinBorough}}>{{this}}</option>
           {{/each}}
         </select>
       </label>
+      <br>
+      <label> Latitude
+        <input type="floatNumber" name="latitude" id="latitude" value={{foundPlant.location.coordinates.[1]}} readonly>
+      </label>
+      <label> Longitude
+        <input type="floatNumber" name="longitude" id="longitude" value={{foundPlant.location.coordinates.[0]}}
+          readonly>
+      </label>
+      <br>
     </div>
     <div class="ap-growing-info">
       <h3>Growing conditions</h3>
@@ -95,6 +104,12 @@ To do:
       <p>Add more images:</p>
       <input type="file" name="plant-image">
     </div>
+
+    <div id='map'></div>
+    Select your location on the map below:
     <button type="submit">Save plant</button>
   </form>
 </div>
+
+<script src="/js/map.js"></script>
+<script src="/js/map-edit.js"></script>
