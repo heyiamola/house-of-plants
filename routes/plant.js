@@ -67,12 +67,12 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
           $push: { usersPlants: createdPlant._id },
         },
         { new: true }
-      );
-      return createdPlant;
+      ).then(() => {
+        console.log("new created plant");
+        res.redirect(`view/${createdPlant._id}`);
+      });
     })
-    .then((createdPlant) => {
-      res.redirect(`view/${createdPlant._id}`);
-    })
+    .then((createdPlant) => {})
     .catch((err) => {
       res.redirect("/", { errorMessage: err });
       console.log(err);
@@ -93,6 +93,97 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
       res.render("plant/view", { foundPlant, isPlantOwner });
     })
     .catch((err) => console.log(err));
+});
+
+router.get("/:plantId/edit", isLoggedIn, (req, res) => {
+  Plant.findById(req.params.plantId)
+    .then((foundPlant) => {
+      if (!foundPlant) {
+        return res.redirect("/");
+      }
+      res.render("plant/edit", {
+        foundPlant,
+        berlinBoroughs: BERLIN_BOROUGHS,
+        plantAvailability: PLANT_AVAILABILITY,
+        plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
+        plantGrowingLight: PLANT_GROWING_LIGHT,
+        plantGrowingLocation: PLANT_GROWING_LOCATION,
+        plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
+        plantGrowingWater: PLANT_GROWING_WATER,
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
+//FILIPE
+router.post("/:plantId/edit", isLoggedIn, (req, res) => {
+  console.log(req.body);
+  const {
+    commonName,
+    botanicalName,
+    description,
+    availability,
+    giveawayOrExchange,
+    location,
+    growingLight,
+    growingWater,
+    growingTemperature,
+    growingLocation,
+    heightOrLength,
+    potDiameter,
+    growingNotes,
+  } = req.body;
+
+  // console.log(req.session);
+  // Plant.findByIdAndUpdate(
+  //   req.session.plant._id,
+  //   {
+  //     commonName,
+  //     botanicalName,
+  //     description,
+  //     availability,
+  //     giveawayOrExchange,
+  //     location: berlinBorough,
+  //     growingLight,
+  //     growingWater,
+  //     growingLocation,
+  //     growingTemperature,
+  //     heightOrLength,
+  //     potDiameter,
+  //     growingNotes,
+  //   },
+  //   { new: true }
+  // ).then((updatedPlant) => {
+  //   req.session.plant = updatedPlant;
+  //   res.redirect(`/view/${updatedPlant._id}`);
+  // });
+});
+
+router.get("/:plantId/delete", isLoggedIn, (req, res) => {
+  Plant.findById(req.params.plantId)
+    .populate("owner")
+    .then((foundPlant) => {
+      if (!foundPlant) {
+        return res.redirect("/");
+      }
+      if ((foundPlant.owner._id = req.session.user._id)) {
+        console.log(foundPlant.owner.usersPlants);
+        console.log(foundPlant._id);
+        User.findByIdAndUpdate(
+          foundPlant.owner._id,
+          {
+            $pull: { usersPlants: foundPlant._id },
+          },
+          { new: true }
+        ).then(() => {
+          console.log(foundPlant.owner.usersPlants);
+          Plant.findByIdAndDelete(foundPlant._id).then(() => {
+            return res.render("plant/delete", { foundPlant });
+          });
+        });
+      }
+    })
+    .catch((err) => cosnole.log(err));
 });
 
 module.exports = router;
