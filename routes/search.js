@@ -53,9 +53,10 @@ router.post("/plant", isLoggedIn, (req, res) => {
   }
 
   filter = { $and: [nameFilter, locationFilter] };
-  console.log(filter);
 
   Plant.find(filter).then((foundPlants) => {
+    console.log(foundPlants);
+
     res.render("search/plant", {
       foundPlants,
       berlinBoroughs: BERLIN_BOROUGHS,
