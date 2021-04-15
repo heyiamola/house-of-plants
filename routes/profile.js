@@ -34,7 +34,14 @@ router.get("/:username/edit", isLoggedIn, (req, res) => {
 });
 
 router.post("/edit", isLoggedIn, (req, res) => {
-  const { name, shortBio, email, location, latitude, longitude } = req.body;
+  const {
+    name,
+    shortBio,
+    email,
+    berlinBorough,
+    latitude,
+    longitude,
+  } = req.body;
 
   User.findByIdAndUpdate(
     req.session.user._id, // id of the user that was logged in
@@ -42,7 +49,7 @@ router.post("/edit", isLoggedIn, (req, res) => {
       name,
       shortBio,
       email,
-      berlinBorough: location,
+      berlinBorough,
       location: { coordinates: [longitude, latitude] },
     },
     { new: true }

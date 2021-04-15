@@ -24,9 +24,15 @@ function editMap(userLocation) {
 }
 
 function getUserLatLng() {
+  if (
+    document.getElementById("latitude").value === "readonly" ||
+    document.getElementById("longitude").value === "readonly"
+  ) {
+    document.getElementById("latitude").value = 52.51704;
+    document.getElementById("longitude").value = 13.38792;
+  }
   userLat = document.getElementById("latitude").value;
   userLng = document.getElementById("longitude").value;
   let userLocation = [userLng, userLat];
-  console.log(userLocation);
   return userLocation;
 }

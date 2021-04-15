@@ -1,5 +1,8 @@
 let mapLocation;
-if (parsedLocationStr.coordinates.length === 0) {
+if (
+  parsedLocationStr.coordinates.length === 0 ||
+  parsedLocationStr.coordinates.length === ["readonly", "readonly"]
+) {
   mapLocation = [13.38792, 52.51704];
 } else {
   mapLocation = parsedLocationStr.coordinates;

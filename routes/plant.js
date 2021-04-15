@@ -42,9 +42,6 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     heightOrLength,
     potDiameter,
     growingNotes,
-    berlinBorough,
-    latitude,
-    longitude,
   } = req.body;
   console.log(req.body);
   Plant.create({
@@ -54,7 +51,6 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     description,
     availability,
     giveawayOrExchange,
-    berlinBorough: berlinBorough,
     growingLight,
     growingWater,
     growingTemperature,
@@ -63,10 +59,6 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     potDiameter,
     growingNotes,
     date: new Date(),
-    location: {
-      type: "Point",
-      coordinates: [longitude, latitude],
-    },
   })
     .then((createdPlant) => {
       User.findByIdAndUpdate(
@@ -98,8 +90,10 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
       if ((foundPlant.owner._id = req.session.user._id)) {
         isPlantOwner = true;
       }
+      console.log(foundPlant.owner);
+
       res.render("plant/view", {
-        location: JSON.stringify(foundPlant.location),
+        location: JSON.stringify(foundPlant.owner.location),
         foundPlant,
         isPlantOwner,
         containsMap: true,
@@ -110,13 +104,14 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
 
 router.get("/:plantId/edit", isLoggedIn, (req, res) => {
   Plant.findById(req.params.plantId)
+    .populate("owner")
     .then((foundPlant) => {
       if (!foundPlant) {
         return res.redirect("/");
       }
       res.render("plant/edit", {
         foundPlant,
-        location: JSON.stringify(foundPlant.location),
+        location: JSON.stringify(foundPlant.owner.location),
         berlinBoroughs: BERLIN_BOROUGHS,
         plantAvailability: PLANT_AVAILABILITY,
         plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
@@ -141,7 +136,6 @@ router.post(
       description,
       availability,
       giveawayOrExchange,
-      berlinBorough,
       growingLight,
       growingWater,
       growingTemperature,
@@ -150,8 +144,6 @@ router.post(
       potDiameter,
       growingNotes,
       picture,
-      latitude,
-      longitude,
     } = req.body;
     Plant.findByIdAndUpdate(
       req.params.plantId,
@@ -161,7 +153,6 @@ router.post(
         description,
         availability,
         giveawayOrExchange,
-        berlinBorough,
         growingLight,
         growingWater,
         growingLocation,
@@ -170,10 +161,6 @@ router.post(
         potDiameter,
         growingNotes,
         picture,
-        location: {
-          type: "Point",
-          coordinates: [longitude, latitude],
-        },
       },
       { new: true }
     )

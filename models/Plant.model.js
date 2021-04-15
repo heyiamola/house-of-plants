@@ -56,13 +56,6 @@ const plantSchema = new Schema({
     description:
       "If the plant is for giveaway (free) or available for exchange with another plant.",
   },
-  berlinBorough: {
-    type: String,
-    required: true,
-    default: "Mitte",
-    enum: BERLIN_BOROUGHS,
-    description: "The plants location / borough in Berlin.",
-  },
   growingLight: {
     type: String,
     enum: PLANT_GROWING_LIGHT,
@@ -102,17 +95,6 @@ const plantSchema = new Schema({
     description: "The diameter of the plant pot in centimeters.",
   },
   date: { type: Date, required: true },
-  location: {
-    type: {
-      type: String,
-      enum: ["Point"],
-      // required: true,
-    },
-    coordinates: {
-      type: [Number],
-      // required: true,
-    },
-  },
 });
 
 const Plant = model("Plant", plantSchema);
