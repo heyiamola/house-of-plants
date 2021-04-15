@@ -5,16 +5,6 @@ const isLoggedIn = require("../middlewares/isLoggedIn");
 const User = require("../models/User.model");
 const { BERLIN_BOROUGHS } = require("../utils/consts");
 
-router.get("/:username/edit", isLoggedIn, (req, res) => {
-  if (req.params.username !== req.session.user.username) {
-    return res.redirect("/");
-  }
-  res.render("profile/edit", {
-    berlinBoroughs: BERLIN_BOROUGHS,
-    containsMap: true,
-  });
-});
-
 // add a route for if you go to /profile/, then you will get redirected to your own profile
 router.get("/", isLoggedIn, (req, res) => {
   res.redirect(`${req.session.user.username}`);
@@ -31,6 +21,16 @@ router.get("/:username", isLoggedIn, (req, res) => {
         containsMap: true,
       });
     });
+});
+
+router.get("/:username/edit", isLoggedIn, (req, res) => {
+  if (req.params.username !== req.session.user.username) {
+    return res.redirect("/");
+  }
+  res.render("profile/edit", {
+    berlinBoroughs: BERLIN_BOROUGHS,
+    containsMap: true,
+  });
 });
 
 router.post("/edit", isLoggedIn, (req, res) => {
