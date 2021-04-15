@@ -3,10 +3,11 @@
   <div class="ap-basic-info">
     <h2>Basic search</h2>
     <label> Seach by plant
-      <input type="text" name="commonName" placeholder="Search a plant by name">
+      <input type="text" name="name" id="name" placeholder="Search a plant by name">
     </label>
     <label> Location
       <select name="location" id="location">
+        <option value="all">Search all locations</option>
         {{#each berlinBoroughs}}
         <option value="{{this}}">{{this}}</option>
         {{/each}}
@@ -63,7 +64,7 @@
   <button type="submit">Search</button>
 </form>
 
-<h2>View all plants</h2>
+<h2>Results</h2>
 <ul>
   {{#each foundPlants}}
   <li>
