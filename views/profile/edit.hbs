@@ -1,35 +1,45 @@
-<h1>Edit your profile</h1>
+<div class="auth-body">
+  {{#if errorMessage}}
+  <p class="error-message">{{errorMessage}}</p>
+  {{/if}}
+  <h2>Edit your profile</h2>
+  <form action="/profile/edit" method="POST" class="sign-up-form" enctype="multipart/form-data">
+    <img class="user-image" src="{{user.profilePicture}}" alt="User's photo">
+    <input type="file">
+    <label> Name
+      <input type="text" name="name" value={{user.name}}>
+    </label>
+    <label> Tell us something about yourself!<br>
+      <input type="text" name="shortBio" value={{user.shortBio}} class="bigger-input">
+    </label>
+    <label> Email
+      <input type="email" name="email" value={{user.email}}>
+    </label>
+    <label> Borough
+      <select name="berlinBoroughgh" id="berlinBorough" selected={{user.berlinBorough}}>
+        {{#each berlinBoroughs}}
+        <option value={{this}}>{{this}}</option>
+        {{/each}}
+      </select>
+    </label>
+    <div class="auth-map-container">
+      <h3>Select your location on the map below:</h3>
+      <div id='map'></div>
+      <div class="geo-data"><label> Latitude
+          <input type="floatNumber" name="latitude" id="latitude" value={{user.location.coordinates.[1]}}
+            class="small-text" readonly>
+        </label>
+        <label> Longitude
+          <input type="floatNumber" name="longitude" id="longitude" value={{user.location.coordinates.[0]}}
+            class="small-text" readonly>
+        </label>
+      </div>
+    </div>
+    <button type="submit">Save</button>
+  </form>
 
-<form action="/profile/edit" method="POST">
-  <label> Name
-    <input type="text" name="name" value={{user.name}}>
-  </label>
-  <label> Short bio
-    <input type="text" name="shortBio" value={{user.shortBio}}>
-  </label>
-  <br>
-  <label> Email
-    <input type="email" name="email" value={{user.email}}>
-  </label>
-  <br>
-  <label> Borough
-    <select name="berlinBoroughgh" id="berlinBorough" selected={{user.berlinBorough}}>
-      {{#each berlinBoroughs}}
-      <option value={{this}}>{{this}}</option>
-      {{/each}}
-    </select>
-  </label>
-  <br>
-  <label> Latitude
-    <input type="floatNumber" name="latitude" id="latitude" value={{user.location.coordinates.[1]}} readonly>
-  </label>
-  <label> Longitude
-    <input type="floatNumber" name="longitude" id="longitude" value={{user.location.coordinates.[0]}} readonly>
-  </label>
-  <br>
-  <button type="submit">Save</button>
-</form>
-<div id='map'></div>
+</div>
+
 
 <script src="/js/map.js"></script>
 <script src="/js/map-edit.js"></script>

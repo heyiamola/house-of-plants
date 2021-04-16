@@ -264,3 +264,8 @@ footer {
   padding: 5px;
   border-radius: 10%;
 }
+
+.bigger-input {
+  min-width: 350px;
+  min-height: 100px;
+}
