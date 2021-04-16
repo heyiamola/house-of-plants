@@ -58,6 +58,13 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
       errorMessage: "Your password needs to be at least 8 characters long.",
       berlinBoroughs: BERLIN_BOROUGHS,
       containsMap: true,
+      username,
+      password,
+      email,
+      name,
+      location,
+      latitude,
+      longitude,
     });
   }
 

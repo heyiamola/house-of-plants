@@ -193,3 +193,9 @@ footer {
   font-weight: bolder;
   border-radius: 5%;
 }
+
+.error-message {
+  margin: 15px;
+  color: red;
+  font-weight: bolder;
+}
