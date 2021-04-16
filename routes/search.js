@@ -16,19 +16,22 @@ const isLoggedIn = require("../middlewares/isLoggedIn");
 const { listen } = require("../app");
 
 router.get("/plant", isLoggedIn, (req, res) => {
-  Plant.find({}).then((foundPlants) => {
-    res.render("search/plant", {
-      foundPlants,
-      berlinBoroughs: BERLIN_BOROUGHS,
-      plantAvailability: PLANT_AVAILABILITY,
-      plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
-      plantGrowingLight: PLANT_GROWING_LIGHT,
-      plantGrowingLocation: PLANT_GROWING_LOCATION,
-      plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
-      plantGrowingWater: PLANT_GROWING_WATER,
-      containsMap: true,
+  Plant.find({})
+    .populate("owner")
+    .then((foundPlants) => {
+      console.log("plants", foundPlants);
+      res.render("search/plant", {
+        foundPlants,
+        berlinBoroughs: BERLIN_BOROUGHS,
+        plantAvailability: PLANT_AVAILABILITY,
+        plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
+        plantGrowingLight: PLANT_GROWING_LIGHT,
+        plantGrowingLocation: PLANT_GROWING_LOCATION,
+        plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
+        plantGrowingWater: PLANT_GROWING_WATER,
+        containsMap: true,
+      });
     });
-  });
 });
 
 router.post("/plant", isLoggedIn, (req, res) => {
@@ -54,21 +57,23 @@ router.post("/plant", isLoggedIn, (req, res) => {
 
   filter = { $and: [nameFilter, locationFilter] };
 
-  Plant.find(filter).then((foundPlants) => {
-    console.log(foundPlants);
+  Plant.find(filter)
+    .populate("owner")
+    .then((foundPlants) => {
+      console.log(foundPlants);
 
-    res.render("search/plant", {
-      foundPlants,
-      berlinBoroughs: BERLIN_BOROUGHS,
-      plantAvailability: PLANT_AVAILABILITY,
-      plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
-      plantGrowingLight: PLANT_GROWING_LIGHT,
-      plantGrowingLocation: PLANT_GROWING_LOCATION,
-      plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
-      plantGrowingWater: PLANT_GROWING_WATER,
-      containsMap: true,
+      res.render("search/plant", {
+        foundPlants,
+        berlinBoroughs: BERLIN_BOROUGHS,
+        plantAvailability: PLANT_AVAILABILITY,
+        plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
+        plantGrowingLight: PLANT_GROWING_LIGHT,
+        plantGrowingLocation: PLANT_GROWING_LOCATION,
+        plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
+        plantGrowingWater: PLANT_GROWING_WATER,
+        containsMap: true,
+      });
     });
-  });
 });
 
 module.exports = router;

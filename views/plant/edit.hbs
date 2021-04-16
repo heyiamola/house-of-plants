@@ -9,28 +9,28 @@ To do:
     <div class="ap-basic-info">
 
       <label> Common name
-        <input type="text" name="commonName" value={{foundPlant.commonName}}>
+        <input type="text" name="commonName" value="{{foundPlant.commonName}}">
       </label>
       <br>
       <label> Botanical name
-        <input type="text" name="botanicalName" value={{foundPlant.botanicalName}}>
+        <input type="text" name="botanicalName" value="{{foundPlant.botanicalName}}">
       </label>
       <br>
       <label> Description
-        <input type="text" name="description" value={{foundPlant.description}}>
+        <input type="text" name="description" value="{{foundPlant.description}}">
       </label>
       <br>
       <label> Availability
         {{#each plantAvailability}}
-        <input type="radio" name="availability" id="availability" value={{this}}
-          checked={{foundPlant.availability}}>{{this}}</option>
+        <input type="radio" name="availability" id="availability" value={{this.[0]}} {{#if this.[1]}} checked="true"
+          {{/if}}>{{this.[0]}}
+        </option>
         {{/each}}
       </label>
       <br>
       <label>Giveaway or exchange?
         {{#each plantGiveawayExchange}}
-        <input type="radio" name="giveawayOrExchange" id="giveawayOrExchange" value={{this}}
-          checked={{foundPlant.giveawayOrExchange}}>{{this}}</option>
+        <input type="radio" name="giveawayOrExchange" id="giveawayOrExchange" value={{this}} checked>{{this}}</option>
         {{/each}}
       </label>
       <br>

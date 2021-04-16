@@ -109,11 +109,15 @@ router.get("/:plantId/edit", isLoggedIn, (req, res) => {
       if (!foundPlant) {
         return res.redirect("/");
       }
+      const plantAvailabilityMapped = PLANT_AVAILABILITY.map((item) => [
+        item,
+        item === foundPlant.availability,
+      ]);
       res.render("plant/edit", {
         foundPlant,
         location: JSON.stringify(foundPlant.owner.location),
         berlinBoroughs: BERLIN_BOROUGHS,
-        plantAvailability: PLANT_AVAILABILITY,
+        plantAvailability: plantAvailabilityMapped,
         plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
         plantGrowingLight: PLANT_GROWING_LIGHT,
         plantGrowingLocation: PLANT_GROWING_LOCATION,
