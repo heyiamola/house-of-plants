@@ -14,9 +14,13 @@ router.get("/:username", isLoggedIn, (req, res) => {
   User.findOne({ username: req.params.username })
     .populate("usersPlants")
     .then((userProfile) => {
-      console.log(userProfile);
+      let isAccountOwner;
+      if (userProfile._id == req.session.user._id) {
+        isAccountOwner = true;
+      }
       res.render("profile/index", {
         userProfile,
+        isAccountOwner,
         location: JSON.stringify(userProfile.location),
         containsMap: true,
       });
