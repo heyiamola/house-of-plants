@@ -1,22 +1,33 @@
-<h1>{{userProfile.username}}</h1>
-<a href="/profile/{{userProfile.username}}/edit">Edit my profile</a>
-<br>
-<img src="{{userProfile.profilePicture}}" alt="Profile picture for user {{user.username}}">
-<br>
-Name: {{userProfile.name}}
-<br>
-Bio: {{userProfile.shortBio}}
-<br>
-<div id='map'></div>
+<div class="profile-body">
+  <div class="profile-header">
+    <h1>{{userProfile.username}}</h1>
+    {{#if isAccountOwner}}
+    <button type="submit"><a href="/profile/{{userProfile.username}}/edit">Edit my profile</a></button>
+    {{else}}
+    <button type="submit"><a href="">Contact user</a></button>
+    {{/if}}
+  </div>
+  <div class="user-container">
+    <div class="user-info">
+      <img src="{{userProfile.profilePicture}}" alt="Profile picture for user {{user.username}}" class="profile-image">
+      <h3>Name: {{userProfile.name}}</h3>
+      <h3>Bio:</h3>
+      <p>{{userProfile.shortBio}}</p>
+    </div>
+    <div id='map'></div>
+  </div>
+  <div class="user-plants-cotainer">
+    <h2>Plants from this user</h2>
+    <ul class="user-plants">
+      {{#each userProfile.usersPlants}}
+      <li> {{this.commonName}}</li>
+      <li> <img src="{{this.picture}}" alt="Picture of {{this.commonName}}"> </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
 
-<h2>Plants from this user</h2>
-<ul class="user-plants">
-  {{#each userProfile.usersPlants}}
-  <li> {{this.commonName}}</li>
-  <li> <img src="{{this.picture}}" alt="Picture of {{this.commonName}}"> </li>
-  {{/each}}
-</ul>
-<br>
+
 <script>
   const locationStr = `{{{location}}}`;
   const parsedLocationStr = JSON.parse(locationStr);

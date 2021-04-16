@@ -1,11 +1,15 @@
-<form action="/auth/login" method="POST">
-   <label> Username
-      <input type="text" name="username">
-   </label>
-   <br>
-   <label> Password
-      <input type="password" name="password">
-   </label>
-   <br>
-   <button type="submit">Submit</button>
-</form>
+<div class="auth-body">
+   <h2>Log in</h2>
+   <form action="/auth/login" method="POST" class="sign-up-form">
+      <label> Username
+         <input type="text" name="username">
+      </label>
+      <label> Password
+         <input type="password" name="password">
+      </label>
+      <button type="submit">Submit</button>
+   </form>
+   {{#if errorMessage}}
+   <p class="error-message">{{errorMessage}}</p>
+   {{/if}}
+</div>

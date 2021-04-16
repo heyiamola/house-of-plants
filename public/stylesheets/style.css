@@ -193,3 +193,38 @@ footer {
   font-weight: bolder;
   border-radius: 5%;
 }
+
+.error-message {
+  margin: 15px;
+  color: red;
+  font-weight: bolder;
+}
+
+.profile-body {
+  /* background-color: rosybrown; */
+  padding: 20px 50px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 80vw;
+}
+
+.profile-image {
+  max-height: 100px;
+  max-width: 100px;
+}
+
+.user-container {
+  display: flex;
+  justify-content: space-between;
+  max-width: 80vw;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
