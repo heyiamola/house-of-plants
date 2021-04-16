@@ -149,7 +149,13 @@ router.post(
       growingNotes,
       picture,
     } = req.body;
-    console.log(picture);
+    // check if a new picture was added, if not, make it the default picture.
+    let updatedPicture;
+    if (!picture) {
+      updatedPicture = "/images/default-plant-picture.png";
+    } else {
+      updatedPicture = picture;
+    }
     Plant.findByIdAndUpdate(
       req.params.plantId,
       {
@@ -165,7 +171,7 @@ router.post(
         heightOrLength,
         potDiameter,
         growingNotes,
-        picture,
+        picture: updatedPicture,
       },
       { new: true }
     )
