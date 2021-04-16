@@ -9,15 +9,15 @@ To do:
     <div class="ap-basic-info">
 
       <label> Common name*
-        <input type="text" name="commonName">
+        <input type="text" name="commonName" placeholder="Name as commonly known">
       </label>
       <br>
-      <label> Botanical name*
-        <input type="text" name="botanicalName">
+      <label> Botanical name
+        <input type="text" name="botanicalName" placeholder="The scientific name">
       </label>
       <br>
       <label> Description*
-        <input type="text" name="description">
+        <input type="text" name="description" placeholder="Please describe the plant / seedling">
       </label>
       <br>
       <label>Giveaway or exchange? </label>
@@ -74,7 +74,8 @@ To do:
       <input type="file" name="plant-image">
     </div>
     <p class="small-text">*required fields</p>
-
+    {{errorMessage}}
+    <br>
     <button type="submit">Add plant</button>
   </form>
 </div>

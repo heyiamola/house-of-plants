@@ -27,7 +27,6 @@ const PLANT_GROWING_WATER_DEFAULT = "don't know";
 router.get("/add", isLoggedIn, (req, res) => {
   res.render("plant/add", {
     berlinBoroughs: BERLIN_BOROUGHS,
-    plantAvailability: PLANT_AVAILABILITY,
     plantGiveawayExchange: optionPreselected(
       PLANT_GIVEAWAY_EXCHANGE,
       PLANT_GIVEAWAY_EXCHANGE_DEFAULT
@@ -67,7 +66,28 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     potDiameter,
     growingNotes,
   } = req.body;
-  console.log(req.body);
+
+  if (!commonName || !description) {
+    return res.status(400).render("plant/add", {
+      errorMessage: "Please fill in all required fields.",
+      berlinBoroughs: BERLIN_BOROUGHS,
+      containsMap: true,
+      plantGiveawayExchange: optionPreselected(
+        PLANT_GIVEAWAY_EXCHANGE,
+        giveawayOrExchange
+      ),
+      plantGrowingLight: optionPreselected(PLANT_GROWING_LIGHT, growingLight),
+      plantGrowingLocation: optionPreselected(
+        PLANT_GROWING_LOCATION,
+        growingLocation
+      ),
+      plantGrowingTemperature: optionPreselected(
+        PLANT_GROWING_TEMPERATURE,
+        growingTemperature
+      ),
+      plantGrowingWater: optionPreselected(PLANT_GROWING_WATER, growingWater),
+    });
+  }
   Plant.create({
     commonName,
     botanicalName,
