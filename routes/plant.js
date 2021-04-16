@@ -15,15 +15,39 @@ const PLANT_GROWING_LOCATION = require("../utils/consts/plant-growing-location")
 const PLANT_GROWING_TEMPERATURE = require("../utils/consts/plant-growing-temperature");
 const PLANT_GROWING_WATER = require("../utils/consts/plant-growing-water");
 
+// Defaults
+
+const optionPreselected = require("../utils/optionPreselected");
+const PLANT_GIVEAWAY_EXCHANGE_DEFAULT = "giveaway";
+const PLANT_GROWING_LIGHT_DEFAULT = "don't know";
+const PLANT_GROWING_LOCATION_DEFAULT = "don't know";
+const PLANT_GROWING_TEMPERATURE_DEFAULT = "don't know";
+const PLANT_GROWING_WATER_DEFAULT = "don't know";
+
 router.get("/add", isLoggedIn, (req, res) => {
   res.render("plant/add", {
     berlinBoroughs: BERLIN_BOROUGHS,
     plantAvailability: PLANT_AVAILABILITY,
-    plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
-    plantGrowingLight: PLANT_GROWING_LIGHT,
-    plantGrowingLocation: PLANT_GROWING_LOCATION,
-    plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
-    plantGrowingWater: PLANT_GROWING_WATER,
+    plantGiveawayExchange: optionPreselected(
+      PLANT_GIVEAWAY_EXCHANGE,
+      PLANT_GIVEAWAY_EXCHANGE_DEFAULT
+    ),
+    plantGrowingLight: optionPreselected(
+      PLANT_GROWING_LIGHT,
+      PLANT_GROWING_LIGHT_DEFAULT
+    ),
+    plantGrowingLocation: optionPreselected(
+      PLANT_GROWING_LOCATION,
+      PLANT_GROWING_LOCATION_DEFAULT
+    ),
+    plantGrowingTemperature: optionPreselected(
+      PLANT_GROWING_TEMPERATURE,
+      PLANT_GROWING_TEMPERATURE_DEFAULT
+    ),
+    plantGrowingWater: optionPreselected(
+      PLANT_GROWING_WATER,
+      PLANT_GROWING_WATER_DEFAULT
+    ),
     containsMap: true,
   });
 });
@@ -109,20 +133,34 @@ router.get("/:plantId/edit", isLoggedIn, (req, res) => {
       if (!foundPlant) {
         return res.redirect("/");
       }
-      const plantAvailabilityMapped = PLANT_AVAILABILITY.map((item) => [
-        item,
-        item === foundPlant.availability,
-      ]);
       res.render("plant/edit", {
         foundPlant,
         location: JSON.stringify(foundPlant.owner.location),
         berlinBoroughs: BERLIN_BOROUGHS,
-        plantAvailability: plantAvailabilityMapped,
-        plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
-        plantGrowingLight: PLANT_GROWING_LIGHT,
-        plantGrowingLocation: PLANT_GROWING_LOCATION,
-        plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
-        plantGrowingWater: PLANT_GROWING_WATER,
+        plantAvailability: optionPreselected(
+          PLANT_AVAILABILITY,
+          foundPlant.availability
+        ),
+        plantGiveawayExchange: optionPreselected(
+          PLANT_GIVEAWAY_EXCHANGE,
+          foundPlant.giveawayOrExchange
+        ),
+        plantGrowingLight: optionPreselected(
+          PLANT_GROWING_LIGHT,
+          foundPlant.growingLight
+        ),
+        plantGrowingLocation: optionPreselected(
+          PLANT_GROWING_LOCATION,
+          foundPlant.growingLocation
+        ),
+        plantGrowingTemperature: optionPreselected(
+          PLANT_GROWING_TEMPERATURE,
+          foundPlant.growingTemperature
+        ),
+        plantGrowingWater: optionPreselected(
+          PLANT_GROWING_WATER,
+          foundPlant.growingWater
+        ),
         containsMap: true,
       });
     })

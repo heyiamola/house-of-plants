@@ -59,6 +59,8 @@ const plantSchema = new Schema({
   growingLight: {
     type: String,
     enum: PLANT_GROWING_LIGHT,
+    required: true,
+    deafult: "don't know",
     description: "The plants light requirement for growing.",
   },
   growingWater: {
@@ -69,11 +71,15 @@ const plantSchema = new Schema({
   growingTemperature: {
     type: String,
     enum: PLANT_GROWING_TEMPERATURE,
+    // required: true,
+    deafult: "don't know",
     description: "The plants temperature requirement for growing.",
   },
   growingLocation: {
     type: String,
     enum: PLANT_GROWING_LOCATION,
+    // required: true,
+    deafult: "don't know",
     description:
       "The plants location requirement for growing (inside / outside).",
   },

@@ -8,51 +8,52 @@ To do:
   <form action="/plant/add" method="POST" enctype="multipart/form-data">
     <div class="ap-basic-info">
 
-      <label> Common name
+      <label> Common name*
         <input type="text" name="commonName">
       </label>
       <br>
-      <label> Botanical name
+      <label> Botanical name*
         <input type="text" name="botanicalName">
       </label>
       <br>
-      <label> Description
+      <label> Description*
         <input type="text" name="description">
       </label>
       <br>
-      <label>Giveaway or exchange?
-        {{#each plantGiveawayExchange}}
-        <input type="radio" name="giveawayOrExchange" id="giveawayOrExchange" value={{this}}>{{this}}</option>
-        {{/each}}
+      <label>Giveaway or exchange? </label>
+      {{#each plantGiveawayExchange}}
+      <label>
+        <input type="radio" name="giveawayOrExchange" id="giveawayOrExchange" value="{{this.[0]}}"
+          {{this.[1]}}>{{this.[0]}}
+        </option>
       </label>
+      {{/each}}
       <br>
     </div>
     <div class="ap-growing-info">
       <h3>Growing conditions</h3>
-
-      <label> Light
-        <select name="growingLight" id="growingLight">
-          {{#each plantGrowingLight}}
-          <option value="{{this}}">{{this}}</option>
-          {{/each}}
-        </select>
+      <label>Light </label>
+      {{#each plantGrowingLight}}
+      <label> <input type="radio" name="growingLight" id="growingLight" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
+        </option>
+      </label>
+      {{/each}}
+      <br>
+      <label>Water </label>
+      {{#each plantGrowingWater}}
+      <label>
+        <input type="radio" name="growingWater" id="growingWater" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
+        </option>
+        {{/each}}
       </label>
       <br>
-      <label> Water
-        <select name="growingWater" id="growingWater">
-          {{#each plantGrowingWater}}
-          <option value="{{this}}">{{this}}</option>
-          {{/each}}
-        </select>
+      <label>Temperature </label>
+      {{#each plantGrowingTemperature}}
+      <label>
+        <input type="radio" name="growingTemperature" id="growingTemperature" value="{{this.[0]}}"
+          {{this.[1]}}>{{this.[0]}}</option>
       </label>
-      <br>
-      <label> Temperature
-        <select name="growingTemperature" id="growingTemperature">
-          {{#each plantGrowingTemperature}}
-          <option value="{{this}}">{{this}}</option>
-          {{/each}}
-        </select>
-      </label>
+      {{/each}}
       <br>
       <label> Height
         <input type="text" name="heightOrLength"> cm
@@ -72,6 +73,8 @@ To do:
       <h3>Upload images</h3>
       <input type="file" name="plant-image">
     </div>
+    <p class="small-text">*required fields</p>
+
     <button type="submit">Add plant</button>
   </form>
 </div>
