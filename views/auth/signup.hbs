@@ -1,20 +1,23 @@
 <div class="auth-body">
+   {{#if errorMessage}}
+   <p>{{errorMessage}}</p>
+   {{/if}}
    <h2>Create your account</h2>
    <form action="/auth/signup" method="POST" class="sign-up-form">
       <label> Name*
-         <input type="text" name="name">
+         <input type="text" name="name" value="{{name}}"">
       </label>
       <label> Username*
-         <input type="text" name="username">
+         <input type=" text" name="username" value="{{username}}"">
       </label>
       <label> Email*
-         <input type="email" name="email">
+         <input type=" email" name="email" value="{{email}}">
       </label>
       <label> Password*
-         <input type="password" name="password">
+         <input type="password" name="password" value="{{password}}">
       </label>
       <label> Borough*
-         <select name="borough" id="borough">
+         <select name="borough" id="borough" value="{{location}}">
             {{#each berlinBoroughs}}
             <option value={{this}}>{{this}}</option>
             {{/each}}
@@ -26,17 +29,16 @@
          <div id='map'></div>
          <div class="geo-data">
             <label> Latitude
-               <input type="floatNumber" name="latitude" id="latitude" class="small-text" readonly>
+               <input type="floatNumber" name="latitude" id="latitude" value="{{latitude}}" class="small-text" readonly>
             </label>
             <label> Longitude
-               <input type="floatNumber" name="longitude" id="longitude" class="small-text" readonly>
+               <input type="floatNumber" name="longitude" id="longitude" value="{{longitude}}" class="small-text"
+                  readonly>
             </label>
          </div>
       </div>
       <button type="submit">Submit</button>
    </form>
 </div>
-
-
 <script src="/js/map.js"></script>
 <script src="/js/map-add.js"></script>
