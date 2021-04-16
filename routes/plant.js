@@ -90,7 +90,7 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
       if ((foundPlant.owner._id = req.session.user._id)) {
         isPlantOwner = true;
       }
-      console.log(foundPlant.owner);
+      console.log(foundPlant.picture);
 
       res.render("plant/view", {
         location: JSON.stringify(foundPlant.owner.location),
@@ -149,6 +149,7 @@ router.post(
       growingNotes,
       picture,
     } = req.body;
+    console.log(picture);
     Plant.findByIdAndUpdate(
       req.params.plantId,
       {
