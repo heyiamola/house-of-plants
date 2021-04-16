@@ -61,14 +61,13 @@ To do:
       </label>
       {{/each}}
       <br>
-      <label>Plant location
-        {{#each plantGrowingLocation}}
-        <label>
-          <input type="radio" name="growingLocation" id="growingLocation" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
-          </option>
-        </label>
-        {{/each}}
+      <label>Plant location </label>
+      {{#each plantGrowingLocation}}
+      <label>
+        <input type="radio" name="growingLocation" id="growingLocation" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
+        </option>
       </label>
+      {{/each}}
       <br>
       <label> Height
         <input type="text" name="heightOrLength" value={{foundPlant.heightOrLength}}> cm

@@ -193,3 +193,19 @@ footer {
   font-weight: bolder;
   border-radius: 5%;
 }
+
+/* STYLES FOR PLANT ROUTE */
+.add-plant {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.add-plant .ap-basic-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-plant .description-input {
+  width: 100%;
+}

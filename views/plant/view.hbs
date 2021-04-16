@@ -15,15 +15,23 @@
 
 <div class="pd-plant-growing-info">
   <h2>Growing info</h2>
+  {{#if dataAvailable.growingLight}}
   <p>Light: {{foundPlant.growingLight}}</p>
-  <p>Water: {{foundPlant.growingTemperature}}</p>
+  {{/if}}
+  {{#if dataAvailable.growingWater}}
+  <p>Water: {{foundPlant.growingWater}}</p>
+  {{/if}}
+  {{#if dataAvailable.growingTemperature}}
   <p>Temperature: {{foundPlant.growingTemperature}}</p>
+  {{/if}}
+  {{#if dataAvailable.growingLocation}}
   <p>Plant location: {{foundPlant.growingLocation}}</p>
-  <p>Height: {{foundPlant.heightOrLength}}</p>
-  <p>Pot diameter: {{foundPlant.potDiameter}}</p>
-
+  {{/if}}
   <h3>Growing notes</h3>
   <p>{{foundPlant.growingNotes}}</p>
+  <h2>Other info.</h2>
+  <p>Height: {{foundPlant.heightOrLength}}</p>
+  <p>Pot diameter: {{foundPlant.potDiameter}}</p>
 </div>
 <div id='map'></div>
 

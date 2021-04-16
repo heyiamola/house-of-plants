@@ -1,81 +1,87 @@
-{{!--
-To do:
-- Add option not to answer the optional questions (e.g. about growing conditions if not known)
---}}
-
-<h1>Add a plant</h1>
-<div class="ap-main-container">
-  <form action="/plant/add" method="POST" enctype="multipart/form-data">
-    <div class="ap-basic-info">
-
-      <label> Common name*
-        <input type="text" name="commonName" placeholder="Name as commonly known">
-      </label>
-      <br>
-      <label> Botanical name
-        <input type="text" name="botanicalName" placeholder="The scientific name">
-      </label>
-      <br>
-      <label> Description*
-        <input type="text" name="description" placeholder="Please describe the plant / seedling">
-      </label>
-      <br>
-      <label>Giveaway or exchange? </label>
-      {{#each plantGiveawayExchange}}
-      <label>
-        <input type="radio" name="giveawayOrExchange" id="giveawayOrExchange" value="{{this.[0]}}"
-          {{this.[1]}}>{{this.[0]}}
-        </option>
-      </label>
-      {{/each}}
-      <br>
-    </div>
-    <div class="ap-growing-info">
-      <h3>Growing conditions</h3>
-      <label>Light </label>
-      {{#each plantGrowingLight}}
-      <label> <input type="radio" name="growingLight" id="growingLight" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
-        </option>
-      </label>
-      {{/each}}
-      <br>
-      <label>Water </label>
-      {{#each plantGrowingWater}}
-      <label>
-        <input type="radio" name="growingWater" id="growingWater" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
-        </option>
-        {{/each}}
-      </label>
-      <br>
-      <label>Temperature </label>
-      {{#each plantGrowingTemperature}}
-      <label>
-        <input type="radio" name="growingTemperature" id="growingTemperature" value="{{this.[0]}}"
-          {{this.[1]}}>{{this.[0]}}</option>
-      </label>
-      {{/each}}
-      <br>
-      <label> Height
-        <input type="text" name="heightOrLength"> cm
-      </label>
-      <br>
-      <label> Pot diameter
-        <input type="text" name="potDiameter"> cm
-      </label>
-      <br>
-      <label> Additional info
-        <input type="text" name="growingNotes">
-      </label>
-    </div>
-
-
-    <div class="ap-upload-image">
-      <h3>Upload images</h3>
-      <input type="file" name="plant-image">
-    </div>
-    <p class="small-text">*required fields</p>
-    {{errorMessage}}
+<div class="add-plant">
+  <h1>Add a plant</h1>
+  <div class="ap-main-container">
+    <form action="/plant/add" method="POST" enctype="multipart/form-data">
+      <div class="ap-basic-info">
+        <label> Common name*
+          <input type="text" name="commonName" placeholder="Name as commonly known">
+        </label>
+        <label> Botanical name
+          <input type="text" name="botanicalName" placeholder="The scientific name">
+        </label>
+        <div>
+          <label> Description*
+            <br>
+            <input class="description-input" type="text" name="description"
+              placeholder="Please describe the plant / seedling">
+          </label>
+        </div>
+        <label for="giveawayOrExchange"> {{#each plantGiveawayExchange}}
+          <label>
+            <input type="radio" name="giveawayOrExchange" id="giveawayOrExchange" value="{{this.[0]}}"
+              {{this.[1]}}>{{this.[0]}}
+            </option>
+          </label>
+          {{/each}}
+        </label>
+      </div>
+  </div>
+  <div class="ap-growing-info">
+    <h3>Growing conditions</h3>
+    <label>Light </label>
+    {{#each plantGrowingLight}}
+    <label> <input type="radio" name="growingLight" id="growingLight" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
+      </option>
+    </label>
+    {{/each}}
     <br>
-    <button type="submit">Add plant</button>
+    <label>Water </label>
+    {{#each plantGrowingWater}}
+    <label>
+      <input type="radio" name="growingWater" id="growingWater" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
+      </option>
+      {{/each}}
+    </label>
+    <br>
+    <label>Temperature </label>
+    {{#each plantGrowingTemperature}}
+    <label>
+      <input type="radio" name="growingTemperature" id="growingTemperature" value="{{this.[0]}}"
+        {{this.[1]}}>{{this.[0]}}</option>
+    </label>
+    {{/each}}
+    <br>
+    <label> Growing notes
+      <input type="text" name="growingNotes" placeholder="Any additional notes on growth">
+    </label>
+    <br>
+    <label>Plant location </label>
+    {{#each plantGrowingLocation}}
+    <label>
+      <input type="radio" name="growingLocation" id="growingLocation" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
+      </option>
+    </label>
+    {{/each}}
+    <br>
+    <h2>Other info.</h2>
+    <label> Height
+      <input type="text" name="heightOrLength"> cm
+    </label>
+    <br>
+    <label> Pot diameter
+      <input type="text" name="potDiameter"> cm
+    </label>
+  </div>
+
+
+  <div class="ap-upload-image">
+    <h3>Upload images</h3>
+    <input type="file" name="plant-image">
+  </div>
+  <p class="small-text">*required fields</p>
+  {{errorMessage}}
+  <br>
+  <button type="submit">Add plant</button>
   </form>
+</div>
 </div>
