@@ -22,7 +22,7 @@ To do:
       <br>
       <label> Availability
         {{#each plantAvailability}}
-        <input type="radio" name="availability" id="availability" value={{this.[0]}} {{#if this.[1]}} checked="true"
+        <input type="radio" name="availability" id="availability" value="{{this.[0]}}" {{#if this.[1]}} checked="true"
           {{/if}}>{{this.[0]}}
         </option>
         {{/each}}
@@ -79,7 +79,7 @@ To do:
       </label>
       <br>
       <label> Additional info
-        <input type="text" name="growingNotes" value={{foundPlant.growingNotes}}>
+        <input type="text" name="growingNotes" value="{{foundPlant.growingNotes}}">
       </label>
     </div>
 
