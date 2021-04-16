@@ -1,3 +1,5 @@
+/* green: #6b824a */
+
 * {
   padding: 0;
   margin: 0;
@@ -5,7 +7,9 @@
 
 body {
   list-style: none;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .body-website {
@@ -19,11 +23,6 @@ body {
   flex: 1;
 }
 
-h1 {
-  font-size: 54px;
-  color: black;
-}
-
 ul {
   list-style: none;
 }
@@ -33,7 +32,7 @@ a {
 }
 
 .nav-bar {
-  background-color: green;
+  background-color: #6b824a;
   width: 100vw;
   height: 50px;
   display: flex;
@@ -55,8 +54,9 @@ a {
 }
 
 .nav-bar-links a {
-  padding: 5px;
+  padding: 10px;
   color: white;
+  font-weight: 400;
 }
 
 .nav-dropdown-menu {
@@ -75,19 +75,20 @@ a {
   display: flex;
   flex-direction: column;
   position: fixed;
-  background: green;
+  background: #6b824a;
   color: white;
   width: 200px;
   top: 50px;
   right: 0;
   font-size: larger;
+  font-weight: 400;
   z-index: 1;
 }
 
 footer {
   width: 100%;
   height: 50px;
-  background-color: lightgray;
+  background-color: #6b824a;
   padding: 10px;
 }
 
@@ -100,34 +101,52 @@ footer {
 }
 
 .fd-search-container {
-  /* background-color: lightsteelblue; */
   width: 100vw;
   height: 100vh;
   background-image: url("../images/fd-cover-unsplash-temp.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  opacity: 0.7;
+  display: flex;
+  justify-content: center;
+}
+
+.fd-search-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: auto;
+  text-shadow: 2px 2px 5px darkslategray;
+  color: white;
 }
 
-.fd-search-container > p {
+.fd-search-content h1 {
+  font-size: 68px;
+  font-stretch: wider;
+}
+
+.fd-search-content > * {
+  padding: 15px;
+}
+
+.fd-search-content > p {
   color: black;
   font-size: 24px;
 }
 
 .fd-buttons button {
-  width: 120px;
-  height: 30px;
+  width: 150px;
+  height: 40px;
   margin: 15px;
-  font-weight: bolder;
+  border-color: #6b824a;
+  border-radius: 5px;
+  opacity: 0.9;
 }
 
 .fd-buttons a {
   color: black;
+  font-weight: bolder;
 }
 
 .fd-body > section {

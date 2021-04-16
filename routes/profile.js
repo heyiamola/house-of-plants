@@ -62,7 +62,7 @@ router.post("/edit", isLoggedIn, parser.single("user-image"), (req, res) => {
     },
     { new: true }
   ).then((updatedUser) => {
-    console.log(profilePicture);
+    console.log(updatedUser);
     req.session.user = updatedUser;
     res.redirect(`/profile/${updatedUser.username}`);
   });
