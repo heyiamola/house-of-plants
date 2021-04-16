@@ -70,8 +70,10 @@
 <ul>
   {{#each foundPlants}}
   <li>
-    <div>{{this.commonName}}</div>
-    <div><img src="{{this.picture}}" alt="Picture of {{this.commonName}}"> </div>
+    <a href="/plant/view/{{this._id}}">
+      <div>{{this.commonName}}</div>
+      <div><img src="{{this.picture}}" alt="Picture of {{this.commonName}}"> </div>
+    </a>
   </li>
   {{/each}}
 </ul>
