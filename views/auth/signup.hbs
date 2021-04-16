@@ -1,39 +1,44 @@
-<form action="/auth/signup" method="POST">
-   <label> Username
-      <input type="text" name="username">
-   </label>
-   <br>
-   <label> Name
-      <input type="text" name="name">
-   </label>
-   <br>
-   <label> Password
-      <input type="password" name="password">
-   </label>
-   <br>
-   <label> Email
-      <input type="email" name="email">
-   </label>
-   <br>
-   <label> Borough
-      <select name="borough" id="borough">
-         {{#each berlinBoroughs}}
-         <option value={{this}}>{{this}}</option>
-         {{/each}}
-      </select>
-   </label>
-   <br>
-   <label> Latitude
-      <input type="floatNumber" name="latitude" id="latitude" readonly>
-   </label>
-   <label> Longitude
-      <input type="floatNumber" name="longitude" id="longitude" readonly>
-   </label>
-   <br>
-
-   <button type="submit">Submit</button>
-</form>
-Select your location on the map below:
-<div id='map'></div>
+<div class="auth-body">
+   {{#if errorMessage}}
+   <p>{{errorMessage}}</p>
+   {{/if}}
+   <h2>Create your account</h2>
+   <form action="/auth/signup" method="POST" class="sign-up-form">
+      <label> Name*
+         <input type="text" name="name" value="{{name}}"">
+      </label>
+      <label> Username*
+         <input type=" text" name="username" value="{{username}}"">
+      </label>
+      <label> Email*
+         <input type=" email" name="email" value="{{email}}">
+      </label>
+      <label> Password*
+         <input type="password" name="password" value="{{password}}">
+      </label>
+      <label> Borough*
+         <select name="borough" id="borough" value="{{location}}">
+            {{#each berlinBoroughs}}
+            <option value={{this}}>{{this}}</option>
+            {{/each}}
+         </select>
+      </label>
+      <p class="small-text">*required fields</p>
+      <div class="auth-map-container">
+         <h3>Select your location on the map below:</h3>
+         <div id='map'></div>
+         <div class="geo-data">
+            <label> Latitude
+               <input type="floatNumber" name="latitude" id="latitude" value="{{latitude}}" class="small-text" readonly>
+            </label>
+            <label> Longitude
+               <input type="floatNumber" name="longitude" id="longitude" value="{{longitude}}" class="small-text"
+                  readonly>
+            </label>
+         </div>
+      </div>
+      <button type="submit">Submit</button>
+   </form>
+</div>
 <script src="/js/map.js"></script>
 <script src="/js/map-add.js"></script>

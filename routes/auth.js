@@ -38,15 +38,26 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
     longitude,
   } = req.body;
 
-  if (!username) {
-    return res
-      .status(400)
-      .render("auth/signup", { errorMessage: "Please provide your username." });
+  if (!username || !name || !email) {
+    return res.status(400).render("auth/signup", {
+      errorMessage: "Please fill in all required fields.",
+      berlinBoroughs: BERLIN_BOROUGHS,
+      containsMap: true,
+      username,
+      password,
+      email,
+      name,
+      location,
+      latitude,
+      longitude,
+    });
   }
 
   if (password.length < 8) {
     return res.status(400).render("auth/signup", {
       errorMessage: "Your password needs to be at least 8 characters long.",
+      berlinBoroughs: BERLIN_BOROUGHS,
+      containsMap: true,
     });
   }
 

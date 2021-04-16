@@ -16,7 +16,6 @@ body {
 
 .container {
   margin-top: 50px;
-  /* z-index: -1; */
   flex: 1;
 }
 
@@ -146,11 +145,51 @@ footer {
 }
 
 #map {
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 300px;
+  margin: 10px;
 }
 
 .plant-image {
   height: 50px;
   width: 50px;
+}
+
+.auth-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.auth-body h2 {
+  padding: 20px;
+}
+
+.sign-up-form {
+  max-width: 80vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign-up-form > * {
+  margin: 5px;
+}
+
+.small-text {
+  font-size: smaller;
+}
+
+.auth-map-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.auth-body button {
+  padding: 5px 10px;
+  font-weight: bolder;
+  border-radius: 5%;
 }
