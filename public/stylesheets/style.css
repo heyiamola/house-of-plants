@@ -201,30 +201,66 @@ footer {
 }
 
 .profile-body {
-  /* background-color: rosybrown; */
   padding: 20px 50px;
   display: flex;
   flex-direction: column;
-}
-
-.profile-header {
-  display: flex;
-  justify-content: space-between;
-  max-width: 80vw;
-}
-
-.profile-image {
-  max-height: 100px;
-  max-width: 100px;
+  width: 80vw;
+  margin: auto;
 }
 
 .user-container {
   display: flex;
   justify-content: space-between;
-  max-width: 80vw;
+  margin: 20px 0px;
+}
+
+.profile-image {
+  max-height: 150px;
+  max-width: 150px;
 }
 
 .user-info {
   display: flex;
   flex-direction: column;
+}
+
+.user-info > * {
+  padding: 10px 0;
+}
+
+.user-info button {
+  width: 100px;
+}
+
+.users-items {
+  margin: 15px 0px;
+}
+
+.profile-cards-container {
+  padding: 10px 0px;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+}
+
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 200px;
+  padding-right: 20px;
+}
+
+.profile-item > * {
+  margin-bottom: 10px;
+}
+
+.profile-item img {
+  height: 150px;
+  width: 150px;
+}
+
+.profile-item button {
+  padding: 5px;
+  border-radius: 10%;
 }

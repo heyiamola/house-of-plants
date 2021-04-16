@@ -1,28 +1,34 @@
 <div class="profile-body">
-  <div class="profile-header">
-    <h1>{{userProfile.username}}</h1>
-    {{#if isAccountOwner}}
-    <button type="submit"><a href="/profile/{{userProfile.username}}/edit">Edit my profile</a></button>
-    {{else}}
-    <button type="submit"><a href="">Contact user</a></button>
-    {{/if}}
-  </div>
+  <h1>{{userProfile.username}}</h1>
   <div class="user-container">
     <div class="user-info">
       <img src="{{userProfile.profilePicture}}" alt="Profile picture for user {{user.username}}" class="profile-image">
       <h3>Name: {{userProfile.name}}</h3>
       <h3>Bio:</h3>
       <p>{{userProfile.shortBio}}</p>
+      {{#if isAccountOwner}}
+      <button type="submit"><a href="/profile/{{userProfile.username}}/edit">Edit my profile</a></button>
+      {{else}}
+      <button type="submit"><a href="">Contact user</a></button>
+      {{/if}}
     </div>
     <div id='map'></div>
   </div>
-  <div class="user-plants-cotainer">
-    <h2>Plants from this user</h2>
-    <ul class="user-plants">
+  <div class="users-items">
+    {{#if isAccountOwner}}
+    <h2>Your plants</h2>
+    {{else}}
+    <h2>User's plants</h2>
+    {{/if}}
+    <div class="profile-cards-container">
       {{#each userProfile.usersPlants}}
-      <li> {{this.commonName}}</li>
-      <li> <img src="{{this.picture}}" alt="Picture of {{this.commonName}}"> </li>
+      <div class="profile-item">
+        <a href="/plant/view/{{this.id}}"><img src="{{this.picture}}" alt="Picture of {{this.commonName}}"></a>
+        <h4>{{this.commonName}}</h4>
+        <button><a href="/plant/view/{{this.id}}">See plant</a></button>
+      </div>
       {{/each}}
+    </div>
     </ul>
   </div>
 </div>
