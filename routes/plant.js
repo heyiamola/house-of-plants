@@ -90,11 +90,11 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
       if ((foundPlant.owner._id = req.session.user._id)) {
         isPlantOwner = true;
       }
-      console.log(foundPlant.picture);
-
+      const dateTimeFormatted = foundPlant.date.toDateString();
       res.render("plant/view", {
         location: JSON.stringify(foundPlant.owner.location),
         foundPlant,
+        dateTimeFormatted,
         isPlantOwner,
         containsMap: true,
       });
