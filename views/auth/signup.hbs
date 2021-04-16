@@ -1,3 +1,4 @@
+<h2>Create your account</h2>
 <form action="/auth/signup" method="POST">
    <label> Username
       <input type="text" name="username">
@@ -23,6 +24,9 @@
       </select>
    </label>
    <br>
+   <p>Select your location on the map below:</p>
+   <div id='map'></div>
+   <br>
    <label> Latitude
       <input type="floatNumber" name="latitude" id="latitude" readonly>
    </label>
@@ -30,10 +34,8 @@
       <input type="floatNumber" name="longitude" id="longitude" readonly>
    </label>
    <br>
-
    <button type="submit">Submit</button>
 </form>
-Select your location on the map below:
-<div id='map'></div>
+
 <script src="/js/map.js"></script>
 <script src="/js/map-add.js"></script>

@@ -16,7 +16,6 @@ body {
 
 .container {
   margin-top: 50px;
-  /* z-index: -1; */
   flex: 1;
 }
 
