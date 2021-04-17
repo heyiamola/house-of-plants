@@ -135,12 +135,20 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
         isPlantOwner = true;
       }
       const dateTimeFormatted = foundPlant.date.toDateString();
+      const dataAvailable = {
+        growingLight: !(foundPlant.growingLight === "don't know"),
+        growingWater: !(foundPlant.growingWater === "don't know"),
+        growingTemperature: !(foundPlant.growingTemperature === "don't know"),
+        growingLocation: !(foundPlant.growingLocation === "don't know"),
+      };
+      console.log(dataAvailable.growingLight);
       res.render("plant/view", {
         location: JSON.stringify(foundPlant.owner.location),
         foundPlant,
         dateTimeFormatted,
         isPlantOwner,
         containsMap: true,
+        dataAvailable,
       });
     })
     .catch((err) => console.log(err));

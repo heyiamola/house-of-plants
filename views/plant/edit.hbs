@@ -22,7 +22,7 @@ To do:
       <br>
       <label> Availability
         {{#each plantAvailability}}
-        <input type="radio" name="availability" id="availability" value={{this.[0]}} {{#if this.[1]}} checked="true"
+        <input type="radio" name="availability" id="availability" value="{{this.[0]}}" {{#if this.[1]}} checked="true"
           {{/if}}>{{this.[0]}}
         </option>
         {{/each}}
@@ -61,14 +61,13 @@ To do:
       </label>
       {{/each}}
       <br>
-      <label>Plant location
-        {{#each plantGrowingLocation}}
-        <label>
-          <input type="radio" name="growingLocation" id="growingLocation" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
-          </option>
-        </label>
-        {{/each}}
+      <label>Plant location </label>
+      {{#each plantGrowingLocation}}
+      <label>
+        <input type="radio" name="growingLocation" id="growingLocation" value="{{this.[0]}}" {{this.[1]}}>{{this.[0]}}
+        </option>
       </label>
+      {{/each}}
       <br>
       <label> Height
         <input type="text" name="heightOrLength" value={{foundPlant.heightOrLength}}> cm
@@ -79,7 +78,7 @@ To do:
       </label>
       <br>
       <label> Additional info
-        <input type="text" name="growingNotes" value={{foundPlant.growingNotes}}>
+        <input type="text" name="growingNotes" value="{{foundPlant.growingNotes}}">
       </label>
     </div>
 

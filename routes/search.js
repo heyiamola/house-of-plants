@@ -19,7 +19,11 @@ router.get("/plant", isLoggedIn, (req, res) => {
   Plant.find({})
     .populate("owner")
     .then((foundPlants) => {
-      console.log("plants", foundPlants);
+      let plantLocations;
+      let ownerLocation;
+      plantOwners = foundPlants.map((plant) => plant.owner);
+      ownerLocation = plantOwners.map((owner) => owner.location);
+      console.log("plants", ownerLocation);
       res.render("search/plant", {
         foundPlants,
         berlinBoroughs: BERLIN_BOROUGHS,
