@@ -2,11 +2,11 @@ let mapSlider = document.getElementById("map-slider");
 let mapSliderValue = mapSlider.value;
 mapSlider.addEventListener("click", function () {
   mapSliderValue = mapSlider.value;
-  updateCircle(myMap, mapSliderValue);
   arePointsInPolygon(
     plantParsedLocationStr,
     bufferUserLocation(userParsedLocationStr, mapSliderValue)
   );
+  updateCircle(myMap, mapSliderValue);
 });
 let myMap;
 let selectCircle;
@@ -115,6 +115,18 @@ function bufferUserLocation(userLocation, bufferRadius) {
 }
 
 function arePointsInPolygon(plantPointLocations, polygon) {
+  if (!polygon) {
+    if (myMap.getLayer("bufferArea")) {
+      myMap.removeLayer("bufferArea");
+    }
+    if (myMap.getLayer("bufferOutline")) {
+      myMap.removeLayer("bufferOutline");
+    }
+    if (myMap.getSource("buffer")) {
+      myMap.removeSource("buffer");
+    }
+    return;
+  }
   plantArray = plantPointLocations.map((value) => value.plantLocation);
   let points = turf.points(plantArray);
   // console.log(polygon);
