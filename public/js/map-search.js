@@ -1,9 +1,12 @@
 let mapSlider = document.getElementById("map-slider");
 let mapSliderValue = mapSlider.value;
-// let mapSliderValue = 10;
 mapSlider.addEventListener("click", function () {
   mapSliderValue = mapSlider.value;
   updateCircle(myMap, mapSliderValue);
+  arePointsInPolygon(
+    plantParsedLocationStr,
+    bufferUserLocation(userParsedLocationStr, mapSliderValue)
+  );
 });
 let myMap;
 let selectCircle;
@@ -17,13 +20,8 @@ function addMap() {
     center: userParsedLocationStr,
     zoom: 9,
   });
-
   addMarkerToMap(myMap);
-
   myMap.addControl(new mapboxgl.NavigationControl());
-
-  // myMap.on("load", addBufferToMap(myMap));
-
   myMap.on("load", function () {
     renderCircle(myMap, mapSliderValue);
     document.getElementById("slidecontainer").style.display = "";
@@ -112,7 +110,16 @@ function renderCircle(myMap, radius) {
 function bufferUserLocation(userLocation, bufferRadius) {
   let userLocationPoint = turf.point(userLocation);
   let buffered = turf.buffer(userLocationPoint, bufferRadius);
+  // console.log(buffered);
   return buffered;
+}
+
+function arePointsInPolygon(plantPointLocations, polygon) {
+  plantArray = plantPointLocations.map((value) => value.plantLocation);
+  let points = turf.points(plantArray);
+  // console.log(polygon);
+  let pointsWithin = turf.pointsWithinPolygon(points, polygon);
+  console.log(pointsWithin);
 }
 
 function addMarkerToMap(myMap) {
