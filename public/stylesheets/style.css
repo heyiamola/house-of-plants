@@ -293,17 +293,15 @@ footer {
 }
 
 /* STYLES FOR PLANT ROUTE */
-/* .add-plant {
+.add-plant {
   display: flex;
   align-items: center;
   flex-direction: column;
-} */
-/* 
+}
 .add-plant .ap-basic-info {
   display: flex;
   flex-direction: column;
 }
-
 .add-plant .description-input {
   width: 100%;
-} */
+}
