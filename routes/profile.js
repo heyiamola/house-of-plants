@@ -56,7 +56,6 @@ router.post("/edit", isLoggedIn, parser.single("user-image"), (req, res) => {
     latitude,
     longitude,
   } = req.body;
-  console.log(req.file);
   const location = { coordinates: [longitude, latitude] };
   const body = Object.fromEntries(
     Object.entries(req.body).filter((el) => {

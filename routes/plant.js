@@ -215,29 +215,20 @@ router.post(
       growingNotes,
       picture,
     } = req.body;
-    // check if a new picture was added, if not, make it the default picture.
-    let updatedPicture;
-    if (!picture) {
-      updatedPicture = "/images/default-plant-picture.png";
-    } else {
-      updatedPicture = picture;
+
+    const body = Object.fromEntries(
+      Object.entries(req.body).filter((el) => {
+        return el[1];
+      })
+    );
+    if (req.file) {
+      body.picture = req.file.path;
     }
+
     Plant.findByIdAndUpdate(
       req.params.plantId,
       {
-        commonName,
-        botanicalName,
-        description,
-        availability,
-        giveawayOrExchange,
-        growingLight,
-        growingWater,
-        growingLocation,
-        growingTemperature,
-        heightOrLength,
-        potDiameter,
-        growingNotes,
-        picture: updatedPicture,
+        ...body,
       },
       { new: true }
     )

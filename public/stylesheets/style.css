@@ -177,6 +177,11 @@ footer {
   width: 50px;
 }
 
+.plant-view-image {
+  max-height: 150px;
+  max-width: 150px;
+}
+
 .auth-body {
   display: flex;
   flex-direction: column;
