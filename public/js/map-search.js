@@ -1,6 +1,12 @@
 let mapSlider = document.getElementById("map-slider");
 let mapSliderValue = mapSlider.value;
+// let mapSliderValue = 10;
+mapSlider.addEventListener("click", function () {
+  mapSliderValue = mapSlider.value;
+  updateCircle(myMap, mapSliderValue);
+});
 let myMap;
+let selectCircle;
 
 addMap();
 
@@ -19,15 +25,56 @@ function addMap() {
   // myMap.on("load", addBufferToMap(myMap));
 
   myMap.on("load", function () {
-    renderCircle(myMap);
+    renderCircle(myMap, mapSliderValue);
+    document.getElementById("slidecontainer").style.display = "";
   });
 }
 
-function renderCircle(myMap) {
-  const selectCircle = bufferUserLocation(
-    userParsedLocationStr,
-    mapSliderValue
-  );
+function updateCircle(myMap, radius) {
+  selectCircle = bufferUserLocation(userParsedLocationStr, radius);
+  if (!selectCircle) {
+    console.log("exit function, no buffer");
+    return;
+  }
+  if (myMap.getLayer("bufferArea")) {
+    myMap.removeLayer("bufferArea");
+  }
+  if (myMap.getLayer("bufferOutline")) {
+    myMap.removeLayer("bufferOutline");
+  }
+  if (myMap.getSource("buffer")) {
+    myMap.removeSource("buffer");
+  }
+  myMap.addSource("buffer", {
+    type: "geojson",
+    data: selectCircle,
+  });
+  // Add a new layer to visualize the polygon.
+  myMap.addLayer({
+    id: "bufferArea",
+    type: "fill",
+    source: "buffer", // reference the data source
+    layout: {},
+    paint: {
+      "fill-color": "#0080ff", // blue color fill
+      "fill-opacity": 0.5,
+    },
+  });
+  // Add a black outline around the polygon.
+  myMap.addLayer({
+    id: "bufferOutline",
+    type: "line",
+    source: "buffer",
+    layout: {},
+    paint: {
+      "line-color": "#000",
+      "line-width": 3,
+    },
+  });
+}
+
+function renderCircle(myMap, radius) {
+  selectCircle = bufferUserLocation(userParsedLocationStr, radius);
   if (!selectCircle) {
     console.log("exit function, no buffer");
     return;
@@ -40,7 +87,7 @@ function renderCircle(myMap) {
 
   // Add a new layer to visualize the polygon.
   myMap.addLayer({
-    id: "buffer",
+    id: "bufferArea",
     type: "fill",
     source: "buffer", // reference the data source
     layout: {},
@@ -51,7 +98,7 @@ function renderCircle(myMap) {
   });
   // Add a black outline around the polygon.
   myMap.addLayer({
-    id: "outline",
+    id: "bufferOutline",
     type: "line",
     source: "buffer",
     layout: {},
@@ -65,7 +112,6 @@ function renderCircle(myMap) {
 function bufferUserLocation(userLocation, bufferRadius) {
   let userLocationPoint = turf.point(userLocation);
   let buffered = turf.buffer(userLocationPoint, bufferRadius);
-  console.log(buffered);
   return buffered;
 }
 

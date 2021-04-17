@@ -8,14 +8,14 @@ function editMap(userLocation) {
     zoom: 9,
   });
 
-  var marker = new mapboxgl.Marker({
+  let marker = new mapboxgl.Marker({
     draggable: true,
   })
     .setLngLat(userLocation)
     .addTo(mapEdit);
 
   function onDragEnd() {
-    var lngLat = marker.getLngLat();
+    let lngLat = marker.getLngLat();
     document.getElementById("latitude").value = lngLat.lat;
     document.getElementById("longitude").value = lngLat.lng;
   }
