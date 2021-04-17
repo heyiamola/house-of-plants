@@ -104,7 +104,7 @@ router.get("/:username/delete/confirmed", isLoggedIn, (req, res) => {
         return res.redirect("/");
       }
       req.session.destroy();
-      return res.render("profile/delete-confirm", { foundUser });
+      return res.render("profile/delete-confirm");
     })
     .catch((err) => console.log(err));
 });

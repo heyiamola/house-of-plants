@@ -4,7 +4,7 @@
   {{/if}}
   <h2>Edit your profile</h2>
   <form action="/profile/edit" method="POST" class="sign-up-form" enctype="multipart/form-data">
-    <img class="user-image" src="{{user.profilePicture}}" alt="User's photo">
+    <img class="profile-image" src="{{user.profilePicture}}" alt="User's photo">
     <input type="file" name="user-image">
     <label> Name
       <input type="text" name="name" value="{{user.name}}">
