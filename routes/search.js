@@ -19,13 +19,12 @@ router.get("/plant", isLoggedIn, (req, res) => {
   Plant.find({})
     .populate("owner")
     .then((foundPlants) => {
-      let plantLocations;
-      let ownerLocation;
-      plantOwners = foundPlants.map((plant) => plant.owner);
-      ownerLocation = plantOwners.map((owner) => owner.location);
-      console.log("plants", ownerLocation);
+      let plantLocationResults = mapSearchResults(foundPlants);
+      // console.log("user", req.session.user.location.coordinates);
       res.render("search/plant", {
         foundPlants,
+        userLocation: JSON.stringify(req.session.user.location.coordinates),
+        plantLocations: JSON.stringify(plantLocationResults),
         berlinBoroughs: BERLIN_BOROUGHS,
         plantAvailability: PLANT_AVAILABILITY,
         plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
@@ -37,6 +36,22 @@ router.get("/plant", isLoggedIn, (req, res) => {
       });
     });
 });
+
+function mapSearchResults(foundPlants) {
+  let searchResultsArray;
+  searchResultsArray = foundPlants
+    .map(function (plant) {
+      let plantOwner = plant.owner;
+      let plantId = plant._id;
+      return { plantOwner, plantId };
+    })
+    .map(function (plant) {
+      let plantLocation = plant.plantOwner.location.coordinates;
+      let plantId = plant.plantId;
+      return { plantLocation, plantId };
+    });
+  return searchResultsArray;
+}
 
 router.post("/plant", isLoggedIn, (req, res) => {
   const { name: searchName, location: searchLocation } = req.body;
@@ -64,8 +79,7 @@ router.post("/plant", isLoggedIn, (req, res) => {
   Plant.find(filter)
     .populate("owner")
     .then((foundPlants) => {
-      console.log(foundPlants);
-
+      // console.log(foundPlants);
       res.render("search/plant", {
         foundPlants,
         berlinBoroughs: BERLIN_BOROUGHS,
