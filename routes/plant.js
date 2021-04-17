@@ -88,23 +88,23 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
       plantGrowingWater: optionPreselected(PLANT_GROWING_WATER, growingWater),
     });
   }
+  const body = Object.fromEntries(
+    Object.entries(req.body).filter((el) => {
+      return el[1];
+    })
+  );
+
+  if (req.file) {
+    body.picture = req.file.path;
+  }
+
   Plant.create({
-    commonName,
-    botanicalName,
+    ...body,
     owner: req.session.user._id,
-    description,
-    availability,
-    giveawayOrExchange,
-    growingLight,
-    growingWater,
-    growingTemperature,
-    growingLocation,
-    heightOrLength,
-    potDiameter,
-    growingNotes,
     date: new Date(),
   })
     .then((createdPlant) => {
+      console.log(createdPlant);
       User.findByIdAndUpdate(
         req.session.user._id,
         {
