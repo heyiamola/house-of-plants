@@ -20,6 +20,7 @@ router.get("/:username", isLoggedIn, (req, res) => {
       if (userProfile._id == req.session.user._id) {
         isAccountOwner = true;
       }
+      console.log(userProfile);
       res.render("profile/index", {
         userProfile,
         isAccountOwner,
@@ -30,17 +31,23 @@ router.get("/:username", isLoggedIn, (req, res) => {
 });
 
 router.get("/:username/edit", isLoggedIn, (req, res) => {
-  console.log(req.session.user);
   if (req.params.username !== req.session.user.username) {
     return res.redirect("/");
   }
-  res.render("profile/edit", {
-    berlinBoroughs: BERLIN_BOROUGHS,
-    containsMap: true,
-  });
+  User.findOne({ username: req.params.username })
+    .then((foundUser) => {
+      console.log(foundUser);
+      res.render("profile/edit", {
+        berlinBoroughs: BERLIN_BOROUGHS,
+        containsMap: true,
+        foundUser,
+      });
+    })
+    .catch((err) => console.log(err));
 });
 
 router.post("/edit", isLoggedIn, parser.single("user-image"), (req, res) => {
+  console.log(req.body);
   const {
     name,
     shortBio,
@@ -48,17 +55,22 @@ router.post("/edit", isLoggedIn, parser.single("user-image"), (req, res) => {
     berlinBorough,
     latitude,
     longitude,
-    profilePicture,
   } = req.body;
+  console.log(req.file);
+  const location = { coordinates: [longitude, latitude] };
+  const body = Object.fromEntries(
+    Object.entries(req.body).filter((el) => {
+      return el[1];
+    })
+  );
+  if (req.file) {
+    body.profilePicture = req.file.path;
+  }
   User.findByIdAndUpdate(
     req.session.user._id, // id of the user that was logged in
     {
-      name,
-      shortBio,
-      email,
-      berlinBorough,
-      location: { coordinates: [longitude, latitude] },
-      profilePicture,
+      ...body,
+      location,
     },
     { new: true }
   ).then((updatedUser) => {
@@ -66,6 +78,35 @@ router.post("/edit", isLoggedIn, parser.single("user-image"), (req, res) => {
     req.session.user = updatedUser;
     res.redirect(`/profile/${updatedUser.username}`);
   });
+});
+
+router.get("/:username/delete", isLoggedIn, (req, res) => {
+  User.findOne({ username: req.params.username })
+    .then((foundUser) => {
+      if (!foundUser) {
+        return res.redirect("/");
+      }
+      if (req.session.user._id != foundUser._id) {
+        return res.redirect("/");
+      }
+      return res.render("profile/delete", { foundUser });
+    })
+    .catch((err) => console.log(err));
+});
+
+router.get("/:username/delete/confirmed", isLoggedIn, (req, res) => {
+  User.findOneAndDelete({ username: req.params.username })
+    .then((foundUser) => {
+      if (!foundUser) {
+        return res.redirect("/");
+      }
+      if (req.session.user._id != foundUser._id) {
+        return res.redirect("/");
+      }
+      req.session.destroy();
+      return res.render("profile/delete-confirm", { foundUser });
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

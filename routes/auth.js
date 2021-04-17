@@ -101,6 +101,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
             type: "Point",
             coordinates: [longitude, latitude],
           },
+          profilePicture: "/images/default-profile-picture.png",
         });
       })
       .then((user) => {

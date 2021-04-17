@@ -8,6 +8,7 @@
       <p>{{userProfile.shortBio}}</p>
       {{#if isAccountOwner}}
       <button type="submit"><a href="/profile/{{userProfile.username}}/edit">Edit my profile</a></button>
+      <button type="submit"><a href="/profile/{{userProfile.username}}/delete">Delete account</a></button>
       {{else}}
       <button type="submit"><a href="">Contact user</a></button>
       {{/if}}
