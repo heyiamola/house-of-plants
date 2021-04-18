@@ -135,10 +135,22 @@ router.get("/login", shouldNotBeLoggedIn, (req, res) => {
 router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
   const { username, password } = req.body;
 
+  if (!password && !password) {
+    return res.status(400).render("auth/login", {
+      errorMessage: "Please provide your username and password.",
+    });
+  }
+
   if (!username) {
     return res
       .status(400)
       .render("auth/login", { errorMessage: "Please provide your username." });
+  }
+
+  if (!password) {
+    return res
+      .status(400)
+      .render("auth/login", { errorMessage: "Please provide your password." });
   }
 
   // Here we use the same logic as above
