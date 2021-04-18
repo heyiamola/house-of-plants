@@ -87,6 +87,7 @@ a {
 
 footer {
   /* width: 100%; */
+  margin: 0, auto;
   height: 50px;
   background-color: #6b824a;
   padding: 10px;
