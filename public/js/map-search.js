@@ -7,6 +7,12 @@ mapSlider.addEventListener("click", function () {
     bufferUserLocation(userParsedLocationStr, mapSliderValue)
   );
   updateCircle(myMap, mapSliderValue);
+  let getSliderText = document.getElementById("slider-value");
+  if (mapSliderValue === "0") {
+    getSliderText.innerHTML = `Move the slider to select radius`;
+  } else {
+    getSliderText.innerHTML = `${mapSliderValue} km`;
+  }
 });
 let myMap;
 let selectCircle;
