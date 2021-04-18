@@ -12,41 +12,29 @@
     </div>
   </section>
   <section class="fd-plants-container">
-    <h2>Popular plants</h2>
-    <p>Check the most popular plants in your area</p>
+    {{#if isAnonymousUser}}
+    <header>
+      <h2>Plants for grabs in <span class="underline">Berlin</span></h2>
+      <a href="/search/plant">See all plants in Berlin</a>
+    </header>
+    {{else}}
+    <header>
+      <h2>Plants for grabs in <span class="underline">{{userLocation}}</span></h2>
+      <a href="/search/plant">See all plants in {{userLocation}}</a>
+    </header>
+    {{/if}}
+    <p>Check plants available in your area</p>
     <div class="fd-cards-container">
-      <div>
-        <img src="../images/card-plant-unsplash-temp.jpg" alt="">
-        <div class="fd-card-plant">
-          <h3>Plant name</h3>
-          <p>Borough</p>
-          <a href="">View plant</a>
-        </div>
+      {{#each plantsInTheArea}}
+      <div class="fd-card-plant">
+        <a href="/plant/view/{{_id}}"><img src="{{picture}}" alt="Photo of {{commonName}}"></a>
+        <h3>{{commonName}}</h3>
+        <p class="label-{{availability}}">{{availability}}</p>
       </div>
-      <div><img src="../images/card-plant-unsplash-temp.jpg" alt="">
-        <div class="fd-card-plant">
-          <h3>Plant name</h3>
-          <p>Borough</p>
-          <a href="">View plant</a>
-        </div>
-      </div>
-      <div><img src="../images/card-plant-unsplash-temp.jpg" alt="">
-        <div class="fd-card-plant">
-          <h3>Plant name</h3>
-          <p>Borough</p>
-          <a href="">View plant</a>
-        </div>
-      </div>
-      <div><img src="../images/card-plant-unsplash-temp.jpg" alt="">
-        <div class="fd-card-plant">
-          <h3>Plant name</h3>
-          <p>Borough</p>
-          <a href="">View plant</a>
-        </div>
-      </div>
+      {{/each}}
     </div>
   </section>
-  <section class="fd-events-container">
+  {{!-- <section class="fd-events-container">
     <h2>Events you might like</h2>
     <p>Meet people, learn new skills, swap plants!</p>
     <div class="fd-cards-container">
@@ -83,6 +71,5 @@
   <section class="fd-plants-new-home">
     <h3>XY plants found new home!</h3>
     <p></p>
-    {{!-- Nice image --}}
-  </section>
+  </section> --}}
 </div>

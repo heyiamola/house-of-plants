@@ -156,14 +156,76 @@ footer {
   padding: 10px 25px;
 }
 
-.fd-cards-container {
+.fd-plants-container {
+  margin: 20px;
+}
+
+.fd-plants-container header {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+.fd-plants-container a {
+  font-size: larger;
+  font-weight: bolder;
+  align-self: center;
+  color: black;
+}
+
+.fd-cards-container {
+  padding: 20px 0;
+  display: flex;
+  justify-content: left;
+}
+
+.underline {
+  text-decoration: underline #6b824a;
+  text-decoration-thickness: 5px;
+}
+
+.fd-plants-container h2 {
+  font-size: 30px;
+}
+
+.fd-plants-container > p {
+  font-size: 20px;
+  padding: 5px 0;
+  font-weight: lighter;
 }
 
 .fd-cards-container img {
   width: 200px;
-  height: 150px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.fd-card-plant {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fd-card-plant h3 {
+  padding: 5px 0;
+}
+
+.label-available {
+  background-color: lightgreen;
+  padding: 2px 3px;
+  border-radius: 5px;
+}
+
+.label-reserved {
+  background-color: peachpuff;
+  padding: 2px 3px;
+  border-radius: 5px;
+}
+
+.label-gone {
+  background-color: lightcoral;
+  padding: 2px 3px;
+  border-radius: 5px;
 }
 
 #map {

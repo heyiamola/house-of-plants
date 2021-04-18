@@ -246,24 +246,30 @@ router.get("/:plantId/delete", isLoggedIn, (req, res) => {
       if (!foundPlant) {
         return res.redirect("/");
       }
-      if ((foundPlant.owner._id = req.session.user._id)) {
-        console.log(foundPlant.owner.usersPlants);
-        console.log(foundPlant._id);
-        User.findByIdAndUpdate(
-          foundPlant.owner._id,
-          {
-            $pull: { usersPlants: foundPlant._id },
-          },
-          { new: true }
-        ).then(() => {
-          console.log(foundPlant.owner.usersPlants);
-          Plant.findByIdAndDelete(foundPlant._id).then(() => {
-            return res.render("plant/delete", { foundPlant });
-          });
-        });
+      if (foundPlant.owner._id != req.session.user._id) {
+        return res.redirect("/");
       }
+      return res.render("plant/delete", { foundPlant });
     })
-    .catch((err) => cosnole.log(err));
+    .catch((err) => console.log(err));
+});
+
+router.get("/:plantId/delete/confirmed", isLoggedIn, (req, res) => {
+  Plant.findById(req.params.plantId)
+    .then((foundPlant) => {
+      if (!foundPlant) {
+        return res.redirect("/");
+      }
+      if (foundPlant.owner.toString() != req.session.user._id.toString()) {
+        return res.redirect("/");
+      }
+      Plant.findByIdAndDelete(foundPlant._id).then(() => {
+        User.findByIdAndUpdate(req.session.user._id, {
+          $pull: { usersPlants: req.params.plantId },
+        }).then(() => res.render("plant/delete-confirm"));
+      });
+    })
+    .catch();
 });
 
 module.exports = router;
