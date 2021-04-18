@@ -37,6 +37,18 @@ router.get("/plant", isLoggedIn, (req, res) => {
     });
 });
 
+// router.post("/plant/filter", isLoggedIn, (req, res) => {
+//   // let parsedJson;
+//   // try {
+//   //   parsedJson = JSON.parse(req.body); // Do your JSON handling here
+//   // } catch (err) {
+//   //   parsedJSON = "";
+//   //   return res.render("/");
+//   }
+
+// console.log(parsedJson);
+// });
+
 router.post("/plant", isLoggedIn, (req, res) => {
   const { name: searchName, location: searchLocation } = req.body;
   let filter;

@@ -1,23 +1,32 @@
 let mapSlider = document.getElementById("map-slider");
 let mapSliderValue = mapSlider.value;
+
 mapSlider.addEventListener("click", function () {
   mapSliderValue = mapSlider.value;
-  arePointsInPolygon(
+  let pointsWithin = arePointsInPolygon(
     plantParsedLocationStr,
     bufferUserLocation(userParsedLocationStr, mapSliderValue)
   );
   updateCircle(myMap, mapSliderValue);
   let getSliderText = document.getElementById("slider-value");
   if (mapSliderValue === "0") {
+    pointsWithin = plantParsedLocationStr;
     getSliderText.innerHTML = `Move the slider to select radius`;
   } else {
     getSliderText.innerHTML = `${mapSliderValue} km`;
   }
+  removePlantMarker(plantMarkers);
+  addMarkerToMap(myMap, pointsWithin);
+  // document.getElementById("filter").value = JSON.stringify(pointsWithin);
 });
+
 let myMap;
 let selectCircle;
+let plantMarkers = [];
 
 addMap();
+
+filterPlantArray();
 
 function addMap() {
   myMap = new mapboxgl.Map({
@@ -26,7 +35,7 @@ function addMap() {
     center: userParsedLocationStr,
     zoom: 9,
   });
-  addMarkerToMap(myMap);
+  addMarkerToMap(myMap, plantParsedLocationStr);
   myMap.addControl(new mapboxgl.NavigationControl());
   myMap.on("load", function () {
     renderCircle(myMap, mapSliderValue);
@@ -60,7 +69,7 @@ function updateCircle(myMap, radius) {
     source: "buffer", // reference the data source
     layout: {},
     paint: {
-      "fill-color": "#0080ff", // blue color fill
+      "fill-color": "#fff", // blue color fill
       "fill-opacity": 0.5,
     },
   });
@@ -71,7 +80,7 @@ function updateCircle(myMap, radius) {
     source: "buffer",
     layout: {},
     paint: {
-      "line-color": "#000",
+      "line-color": "#6b824a",
       "line-width": 3,
     },
   });
@@ -133,23 +142,41 @@ function arePointsInPolygon(plantPointLocations, polygon) {
     }
     return;
   }
-  plantArray = plantPointLocations.map((value) => value.plantLocation);
-  let points = turf.points(plantArray);
-  // console.log(polygon);
-  let pointsWithin = turf.pointsWithinPolygon(points, polygon);
-  console.log(pointsWithin);
+
+  plantPointLocations.map((obj) => {
+    let point = turf.point(obj.plantLocation);
+    let isInBufferBoolean = turf.booleanPointInPolygon(point, polygon);
+    return (obj.isInBuffer = isInBufferBoolean);
+  });
+  let filtered = plantPointLocations.filter((value) => value.isInBuffer);
+
+  return filtered;
 }
 
-function addMarkerToMap(myMap) {
+function addMarkerToMap(myMap, markerLocations) {
   // let plantPopup = new mapboxgl.Popup({ offset: 25 }).setText("Testing popup");
-  plantParsedLocationStr.forEach((plant) => {
+  markerLocations.forEach((plant) => {
     let plantPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
       '<a href="/plant/view/' + plant.plantId + '">View plant</a>'
       // `<a href="/plant/view/${plant.plantId}>View plant</a>`
     );
-    new mapboxgl.Marker({})
-      .setLngLat(plant.plantLocation)
-      .setPopup(plantPopup)
-      .addTo(myMap);
+    plantMarkers.push(
+      new mapboxgl.Marker({})
+        .setLngLat(plant.plantLocation)
+        .setPopup(plantPopup)
+        .addTo(myMap)
+    );
   });
+}
+
+function removePlantMarker(plantMarkers) {
+  plantMarkers.forEach((marker) => marker.remove());
+}
+
+function filterPlantArray(allPlants, plantsInFilter) {
+  if (!plantsInFilter) {
+    return;
+  }
+  console.log("ALLPLANTS:", allPlants);
+  console.log("FILTERED", plantsInFilter.features);
 }

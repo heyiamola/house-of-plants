@@ -87,13 +87,18 @@ a {
 
 footer {
   /* width: 100%; */
-  margin: 0, auto;
   height: 50px;
   background-color: #6b824a;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   color: white;
+}
+
+.made-by {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
 .fd-body {
