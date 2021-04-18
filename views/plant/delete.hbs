@@ -1,4 +1,8 @@
-<h2>{{foundPlant.commonName}} has been deleted</h2>
-
-<button><a href="/profile/{{username}}">Go to your profile</a></button>
-<button><a href="/">Go to homepage</a></button>
+<div class="delete-dialog">
+  <h2>Are you sure you want to delete {{foundPlant.commonName}}?</h2>
+  <div>
+    <button class="btn-yes"><a href="/plant/{{foundPlant._id}}/delete/confirmed">Yes, delete this
+        plant</a></button>
+    <button class="btn-no"><a href="/plant/view/{{foundPlant._id}}">Nope, keep the plant</a></button>
+  </div>
+</div>
