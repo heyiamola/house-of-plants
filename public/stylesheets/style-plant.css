@@ -1,0 +1,32 @@
+.plant-body {
+  padding: 20px 50px;
+  display: flex;
+  width: 80vw;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.plant-view-image {
+  /* max-height: 150px; */
+  max-width: 150px;
+}
+
+.plant-view-map {
+  width: 250px;
+  height: 150px;
+  margin: 10px;
+}
+
+.plant-user-info {
+  display: flex;
+  align-items: center;
+  /* width: 100%; */
+  padding: 5px;
+  margin: 5px;
+  box-shadow: 5px 5px 10px lightgray;
+}
+
+.plant-user-info img {
+  max-height: 50px;
+  padding: 5px;
+}

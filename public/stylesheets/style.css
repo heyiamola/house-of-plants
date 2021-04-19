@@ -45,7 +45,7 @@ a {
 }
 
 .nav-bar-links {
-  padding: 10px;
+  padding: 0px 20px 0px 10px;
   font-size: larger;
 }
 
@@ -53,8 +53,11 @@ a {
   display: flex;
 }
 
-.nav-bar-links a {
+.nav-bar li {
   padding: 10px;
+}
+
+.nav-bar-links a {
   color: white;
   font-weight: 400;
 }
@@ -234,7 +237,7 @@ footer {
   border-radius: 5px;
 }
 
-#map {
+.map {
   width: 400px;
   height: 300px;
   margin: 10px;
@@ -243,11 +246,6 @@ footer {
 .plant-image {
   height: 50px;
   width: 50px;
-}
-
-.plant-view-image {
-  max-height: 150px;
-  max-width: 150px;
 }
 
 .auth-body {
