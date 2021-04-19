@@ -23,12 +23,15 @@ mapSlider.addEventListener("click", function () {
 let myMap;
 let selectCircle;
 let plantMarkers = [];
-
-addMap();
+if (!userParsedLocationStr) {
+  addMap([13.3891, 52.5161]);
+} else {
+  addMap(userParsedLocationStr);
+}
 
 filterPlantArray();
 
-function addMap() {
+function addMap(mapCenter) {
   myMap = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
