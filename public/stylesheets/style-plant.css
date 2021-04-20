@@ -1,3 +1,13 @@
+.logo-nav-img {
+  width: 80px;
+  padding: 20px;
+}
+
+.nav-bar-left {
+  display: flex;
+  align-items: center;
+}
+
 .plant-body {
   padding: 20px 50px;
   display: flex;
