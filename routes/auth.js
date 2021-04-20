@@ -95,6 +95,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
         longitude,
       });
     }
+
     return bcrypt
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))

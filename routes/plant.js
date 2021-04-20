@@ -132,7 +132,7 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
         return res.redirect("/");
       }
       if ((foundPlant.owner._id = req.session.user._id)) {
-        isPlantOwner = true;
+        isPlantOwner = false;
       }
       const dateTimeFormatted = foundPlant.date.toDateString();
       const dataAvailable = {
