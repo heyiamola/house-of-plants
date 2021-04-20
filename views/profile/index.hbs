@@ -1,37 +1,51 @@
 <div class="profile-body">
-  <h1>{{userProfile.username}}</h1>
+  <div class="user-header">
+    {{#if isAccountOwner}}
+    <h1 class="underline">Hey, {{userProfile.name}}</h1>
+    {{else}}
+    <h1 class="underline">{{userProfile.name}}'s profile</h1>
+    {{/if}}
+    <div class="user-header-buttons">
+      {{#if isAccountOwner}}
+      <button type="submit" class="btn-yes"><a href="/profile/{{userProfile.username}}/edit">Edit my
+          profile</a></button>
+      <button type="submit" class="btn-no"><a href="/profile/{{userProfile.username}}/delete">Delete
+          account</a></button>
+      {{else}}
+      <button type="submit" class="btn-yes"><a href="">Contact user</a></button>
+      {{/if}}
+    </div>
+  </div>
   <div class="user-container">
     <div class="user-info">
       <img src="{{userProfile.profilePicture}}" alt="Profile picture for user {{user.username}}" class="profile-image">
-      <h3>Name: {{userProfile.name}}</h3>
-      <h3>Bio:</h3>
-      <p>{{userProfile.shortBio}}</p>
-      {{#if isAccountOwner}}
-      <button type="submit"><a href="/profile/{{userProfile.username}}/edit">Edit my profile</a></button>
-      <button type="submit"><a href="/profile/{{userProfile.username}}/delete">Delete account</a></button>
-      {{else}}
-      <button type="submit"><a href="">Contact user</a></button>
-      {{/if}}
+      <h3>{{userProfile.username}}</h3>
+      <h4 class="label-borough">{{userProfile.berlinBorough}}</h4>
+      <p class="short-bio"><i>{{userProfile.shortBio}}</i></p>
     </div>
-    <div id='map' class="map"></div>
-  </div>
-  <div class="users-items">
-    {{#if isAccountOwner}}
-    <h2>Your plants</h2>
-    {{else}}
-    <h2>User's plants</h2>
-    {{/if}}
-    <div class="profile-cards-container">
-      {{#each userProfile.usersPlants}}
-      <div class="profile-item">
-        <a href="/plant/view/{{this.id}}"><img src="{{this.picture}}" alt="Picture of {{this.commonName}}"></a>
-        <h4>{{this.commonName}}</h4>
-        <button><a href="/plant/view/{{this.id}}">See plant</a></button>
+    <div class="users-plants">
+      <div class="users-items">
+        {{#if isAccountOwner}}
+        <h2>Your plants</h2>
+        {{else}}
+        <h2>User's plants</h2>
+        {{/if}}
+        <div class="fd-cards-container">
+          {{#each userProfile.usersPlants}}
+          <div class="profile-item">
+            <a href="/plant/view/{{this.id}}"><img src="{{this.picture}}" alt="Picture of {{this.commonName}}"></a>
+            <h4>{{this.commonName}}</h4>
+            <button><a href="/plant/view/{{this.id}}">See plant</a></button>
+          </div>
+          {{/each}}
+        </div>
+        </ul>
       </div>
-      {{/each}}
     </div>
-    </ul>
+
   </div>
+
+  <div id='map' class="map"></div>
 </div>
 
 

@@ -318,8 +318,30 @@ footer {
   margin: auto;
 }
 
+.user-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-header h1 {
+  font-size: 36px;
+}
+
+.user-header-buttons {
+  padding-right: 5px;
+}
+
+.user-header-buttons button {
+  font-size: 16px;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 5px;
+}
+
 .user-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin: 20px 0px;
 }
@@ -333,18 +355,36 @@ footer {
 .user-info {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .user-info > * {
-  padding: 10px 0;
+  padding: 5px 0;
 }
 
-.user-info button {
-  width: 100px;
+.label-borough {
+  background-color: skyblue;
+  padding: 2px 3px;
+  border-radius: 5px;
+}
+
+.short-bio {
+  width: 55vw;
+  padding: 15px;
 }
 
 .users-items {
   margin: 15px 0px;
+}
+
+.users-items h2 {
+  font-size: 24px;
+}
+
+.users-items button {
+  border: none;
+  background-color: darkkhaki;
+  color: white;
 }
 
 .profile-cards-container {
@@ -412,11 +452,13 @@ a:visited {
 }
 
 .btn-yes {
-  background-color: limegreen;
+  background-color: peachpuff;
+  border: none;
 }
 
 .btn-no {
-  background-color: orangered;
+  background-color: salmon;
+  border: none;
 }
 
 /* STYLES FOR PLANT ROUTE */
