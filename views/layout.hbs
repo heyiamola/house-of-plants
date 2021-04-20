@@ -22,16 +22,11 @@
 
 <body>
    <nav class="nav-bar">
-      <div class="nav-bar-left">
-         <a href="/"><img class="logo-nav-img" src="/images/logo_small.png" alt="House of plants logo"></a>
-
-         <div class="nav-bar-links">
-            <ul>
-
-               <li><a href="/search/plant">Plants</a></li>
-               <li><a href="/searc/event">Events</a></li>
-            </ul>
-         </div>
+      <div class="nav-bar-links">
+         <ul>
+            <li><a href="/search/plant">Plants</a></li>
+            {{!-- <li><a href="/searc/event">Events</a></li> --}}
+         </ul>
       </div>
       <div class="nav-bar-links">
          {{#if user}}
@@ -48,7 +43,7 @@
    <ul class="nav-dropdown-menu">
       <li><a href="/profile/{{user.username}}">Your profile</a></li>
       <li><a href="/plant/add">Add a plant</a></li>
-      <li><a href="/event/add">Add an event</a></li>
+      {{!-- <li><a href="/event/add">Add an event</a></li> --}}
       <li><a href="/profile/wishlist">Wishlist</a></li>
       <li><a href="/auth/logout">Logout</a></li>
    </ul>
@@ -60,17 +55,9 @@
 
       </div>
       <footer>
-         {{!-- <div class="newsletter-box">
-            <h3>Stay in touch with us</h3>
-         </div> --}}
          <div class="made-by">
             <p> Made with ☀️ and 💧 by <a href="https://github.com/yelsre">Frankie</a> and <a
                   href="https://github.com/ollayka">Ola</a></p>
-            {{!-- <ul>
-               <li><a href="/">About us</a></li>
-               <li><a href="/">FAQ</a></li>
-               <li><a href="/">Contact</a></li>
-            </ul> --}}
          </div>
       </footer>
    </div>

@@ -33,6 +33,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
     password,
     email,
     name,
+    berlinBorough,
     location,
     latitude,
     longitude,
@@ -47,7 +48,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
       password,
       email,
       name,
-      location,
+      berlinBorough,
       latitude,
       longitude,
     });
@@ -62,7 +63,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
       password,
       email,
       name,
-      location,
+      berlinBorough,
       latitude,
       longitude,
     });
@@ -79,13 +80,23 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   // }
 
   // Search the database for a user with the username submitted in the form
-  User.findOne({ username }).then((found) => {
+  User.findOne({ $or: [{ username }, { email }] }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
-      return res
-        .status(400)
-        .render("auth/signup", { errorMessage: "Username already taken" });
+      return res.status(400).render("auth/signup", {
+        errorMessage: "Username or email already taken",
+        berlinBoroughs: BERLIN_BOROUGHS,
+        containsMap: true,
+        username,
+        password,
+        email,
+        name,
+        berlinBorough,
+        latitude,
+        longitude,
+      });
     }
+
     return bcrypt
       .genSalt(saltRounds)
       .then((salt) => bcrypt.hash(password, salt))
@@ -118,7 +129,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
         if (error.code === 11000) {
           return res.status(400).render("signup", {
             errorMessage:
-              "Username need to be unique. The username you chose is already in use.",
+              "Username and email need to be unique. The username/email you entered is already in use.",
           });
         }
         return res.status(500).render("auth/signup", {
@@ -135,10 +146,22 @@ router.get("/login", shouldNotBeLoggedIn, (req, res) => {
 router.post("/login", shouldNotBeLoggedIn, (req, res, next) => {
   const { username, password } = req.body;
 
+  if (!password && !password) {
+    return res.status(400).render("auth/login", {
+      errorMessage: "Please provide your username and password.",
+    });
+  }
+
   if (!username) {
     return res
       .status(400)
       .render("auth/login", { errorMessage: "Please provide your username." });
+  }
+
+  if (!password) {
+    return res
+      .status(400)
+      .render("auth/login", { errorMessage: "Please provide your password." });
   }
 
   // Here we use the same logic as above
