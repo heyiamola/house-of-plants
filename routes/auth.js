@@ -82,9 +82,18 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
   User.findOne({ username }).then((found) => {
     // If the user is found, send the message username is taken
     if (found) {
-      return res
-        .status(400)
-        .render("auth/signup", { errorMessage: "Username already taken" });
+      return res.status(400).render("auth/signup", {
+        errorMessage: "Username already taken",
+        berlinBoroughs: BERLIN_BOROUGHS,
+        containsMap: true,
+        username,
+        password,
+        email,
+        name,
+        location,
+        latitude,
+        longitude,
+      });
     }
     return bcrypt
       .genSalt(saltRounds)
