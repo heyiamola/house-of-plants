@@ -30,3 +30,70 @@
   max-height: 50px;
   padding: 5px;
 }
+
+/* STYLES FOR PLANT ROUTE */
+.add-plant-new {
+  padding: 20px 50px;
+  display: flex;
+  width: 80vw;
+  min-width: 500px;
+  margin: auto;
+  flex-direction: column;
+}
+.add-plant-new .ap-basic-info {
+  display: flex;
+  flex-direction: column;
+}
+.add-plant-new .description-input {
+  width: 100%;
+}
+
+.add-plant-section {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.add-plant-section > * {
+  padding: 5px;
+}
+
+.add-plant-text-input {
+  padding: 5px 10px;
+  background-color: #d2d9c8;
+  border-radius: 5px;
+  border-style: line;
+  border-color: #a8ada0;
+  text-align: center;
+  min-width: 300px;
+}
+
+.add-plant-number-input {
+  padding: 5px 10px;
+  background-color: #d2d9c8;
+  border-radius: 5px;
+  border-style: line;
+  border-color: #a8ada0;
+  text-align: center;
+  max-width: 25px;
+}
+.add-plant-button {
+  cursor: pointer;
+  color: white;
+  width: 150px;
+  height: 40px;
+  margin: 15px auto;
+  border-radius: 5px;
+  background-color: #6b824a;
+}
+
+th {
+  border: 1px solid #6b824a;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+td {
+  background-color: #d2d9c8;
+  padding: 3px;
+}
