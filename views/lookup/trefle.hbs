@@ -1,0 +1,23 @@
+<h1>Search the trefle.io API for plant names</h1>
+<form class="search-form" action="/lookup" method="POST">
+  <div class="search-fields">
+    <label> Lookup plant by common name
+      <input type="text" name="commonName" id="commonName" placeholder="Type plant name">
+    </label>
+  </div>
+  <button class="search-button" type="submit">Lookup plant</button>
+</form>
+<h2>Search results</h2>
+<ul>
+  {{#each returnedPlant}}
+  <li class="search-card-plant">
+    <div>
+      <img src="{{this.image_url}}" height="300" alt="">
+      <b>{{this.common_name}}</bs>
+        <i>{{this.scientific_name}}</i>
+    </div>
+  </li>
+
+
+  {{/each}}
+</ul>

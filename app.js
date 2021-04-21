@@ -51,6 +51,9 @@ app.use("/event", eventRoutes);
 const searchRoutes = require("./routes/search");
 app.use("/search", searchRoutes);
 
+const lookupRoutes = require("./routes/lookup");
+app.use("/lookup", lookupRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
