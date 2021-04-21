@@ -160,7 +160,14 @@ function addMarkerToMap(myMap, markerLocations) {
   // let plantPopup = new mapboxgl.Popup({ offset: 25 }).setText("Testing popup");
   markerLocations.forEach((plant) => {
     let plantPopup = new mapboxgl.Popup({ offset: 25 }).setHTML(
-      '<a href="/plant/view/' + plant.plantId + '">View plant</a>'
+      '<a href="/plant/view/' +
+        plant.plantId +
+        '">' +
+        plant.plantCommonName +
+        "</a> <br> " +
+        '<img src = "' +
+        plant.plantPicture +
+        '" width="50">'
       // `<a href="/plant/view/${plant.plantId}>View plant</a>`
     );
     plantMarkers.push(

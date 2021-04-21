@@ -114,12 +114,17 @@ function mapSearchResults(foundPlants) {
     .map(function (plant) {
       let plantOwner = plant.owner;
       let plantId = plant._id;
-      return { plantOwner, plantId };
+      let plantCommonName = plant.commonName;
+      let plantPicture = plant.picture;
+
+      return { plantOwner, plantId, plantCommonName, plantPicture };
     })
     .map(function (plant) {
       let plantLocation = plant.plantOwner.location.coordinates;
       let plantId = plant.plantId;
-      return { plantLocation, plantId };
+      let plantCommonName = plant.plantCommonName;
+      let plantPicture = plant.plantPicture;
+      return { plantLocation, plantId, plantCommonName, plantPicture };
     });
   return searchResultsArray;
 }
