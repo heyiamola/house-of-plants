@@ -1,11 +1,16 @@
 .logo-nav-img {
   width: 80px;
-  padding: 20px;
+  padding: 5px 10px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  float: right;
+  filter: drop-shadow(5px lightgrey);
+  -webkit-filter: drop-shadow(5px lightgrey);
 }
 
-.nav-bar-left {
-  display: flex;
-  align-items: center;
+.nav-bar-left-text {
+  margin: 80px;
 }
 
 .plant-body {
