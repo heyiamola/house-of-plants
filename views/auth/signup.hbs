@@ -29,11 +29,12 @@
          <div id='map' class="map"></div>
          <div class="geo-data">
             <label> Latitude
-               <input type="floatNumber" name="latitude" id="latitude" value="{{latitude}}" class="small-text" readonly>
+               <input type="floatNumber" name="latitude" id="latitude" {{#if latitude}}value="{{latitude}}" {{else}}
+                  value="52.51704" {{/if}} class="small-text" readonly>
             </label>
             <label> Longitude
-               <input type="floatNumber" name="longitude" id="longitude" value="{{longitude}}" class="small-text"
-                  readonly>
+               <input type="floatNumber" name="longitude" id="longitude" {{#if longitude}}value="{{longitude}}" {{else}}
+                  value="13.38792" {{/if}} class="small-text" readonly>
             </label>
          </div>
       </div>
