@@ -34,7 +34,7 @@ router.get("/", (req, res, next) => {
       .then((foundPlants) => {
         console.log(foundPlants);
         return foundPlants
-          .filter((plant) => plant.owner.berlinBorough === userLocation)
+          .filter((plant) => plant.berlinBorough === userLocation)
           .slice(1, 6);
       })
       .then((plantsInTheArea) => {
