@@ -52,6 +52,10 @@ const userSchema = new Schema({
     type: String,
     default: "/images/default-profile-picture.png",
   },
+  newsletter: {
+    type: Boolean,
+    default: false,
+  },
   usersPlants: [{ type: Schema.Types.ObjectId, ref: "Plant" }],
   upcomingEvents: [],
   createdEvents: [],

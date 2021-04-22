@@ -96,6 +96,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
         berlinBorough,
         latitude,
         longitude,
+        newsletter,
       });
     }
 
