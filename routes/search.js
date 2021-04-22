@@ -1,5 +1,7 @@
 const express = require("express");
 
+const optionPreselected = require("../utils/optionPreselected");
+
 const {
   BERLIN_BOROUGHS,
   PLANT_GROWING_TEMPERATURE,
@@ -33,7 +35,7 @@ router.get("/plant", (req, res) => {
         foundPlants,
         userLocation,
         plantLocations: JSON.stringify(plantLocationResults),
-        berlinBoroughs: BERLIN_BOROUGHS,
+        berlinBoroughs: optionPreselected(BERLIN_BOROUGHS, "all"),
         plantAvailability: PLANT_AVAILABILITY,
         plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
         plantGrowingLight: PLANT_GROWING_LIGHT,
@@ -78,6 +80,11 @@ router.post("/plant", (req, res) => {
     };
   }
 
+  let searchLocationAll = true;
+  if (searchLocation !== "all") {
+    searchLocationAll = false;
+  }
+
   filter = { $and: [nameFilter, locationFilter] };
 
   if (!req.session.user) {
@@ -95,7 +102,7 @@ router.post("/plant", (req, res) => {
         foundPlants,
         userLocation,
         plantLocations: JSON.stringify(plantLocationResults),
-        berlinBoroughs: BERLIN_BOROUGHS,
+        berlinBoroughs: optionPreselected(BERLIN_BOROUGHS, searchLocation),
         plantAvailability: PLANT_AVAILABILITY,
         plantGiveawayExchange: PLANT_GIVEAWAY_EXCHANGE,
         plantGrowingLight: PLANT_GROWING_LIGHT,
@@ -103,6 +110,7 @@ router.post("/plant", (req, res) => {
         plantGrowingTemperature: PLANT_GROWING_TEMPERATURE,
         plantGrowingWater: PLANT_GROWING_WATER,
         containsMap: true,
+        searchName,
       });
     });
 });

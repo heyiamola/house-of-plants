@@ -3,13 +3,14 @@
   <form class="search-form" action="/search/plant" method="POST">
     <div class="search-fields">
       <label> Search
-        <input type="text" name="name" id="name" placeholder="plant name">
+        <input type="text" name="name" id="name" placeholder="plant name" {{#if searchName}}value="{{searchName}}"
+          {{/if}}>
       </label>
       <label> in
         <select name="location" id="location">
-          <option value="all">all locations</option>
+          <option value="all"> all locations</option>
           {{#each berlinBoroughs}}
-          <option value="{{this}}">{{this}}</option>
+          <option value="{{this.[0]}}" {{#if this.[1]}} selected="" {{/if}}>{{this.[0]}}</option>
           {{/each}}
         </select>
       </label>
@@ -61,7 +62,10 @@
       </label>
       <br>
     </div> --}}
-    <button class="search-button" type="submit">Search</button>
+    <div>
+      <button class="search-button" type="submit">Search</button> <a class="small-text" href="/search/plant">View all
+        plants</a>
+    </div>
   </form>
   <div class="results-and-filter">
     <div class="results">
