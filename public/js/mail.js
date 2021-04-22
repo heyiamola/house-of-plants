@@ -21,7 +21,6 @@ body {
   font-size: 12px;
   font-family: Montserrat;
   text-align: center;
-  min-height: 100vh;
 }
 
 div > * {
@@ -31,6 +30,7 @@ div > * {
 div {
   margin: 20px;
   line-height: 1.5em;
+  min-height: calc(100vh - 75px)
 }
 
 h2 {
@@ -116,6 +116,7 @@ div > * {
 div {
   margin: 20px;
   line-height: 1.5em;
+  min-height: calc(100vh - 75px)
 }
 
 h2 {
@@ -180,8 +181,8 @@ const plantInquiry = `hi, can I get this plant?`;
 // const transporter = nodemailer.createTransport({
 //   service: "Gmail",
 //   auth: {
-//     user: process.env.EMAIL_ADDRESS,
-//     pass: process.env.EMAIL_PASSWORD,
+//     // user: process.env.EMAIL_ADDRESS,
+//     // pass: process.env.EMAIL_PASSWORD,
 //   },
 // });
 
