@@ -32,7 +32,6 @@ router.get("/", (req, res, next) => {
     Plant.find({})
       .populate("owner")
       .then((foundPlants) => {
-        console.log(foundPlants);
         return foundPlants
           .filter((plant) => plant.berlinBorough === userLocation)
           .slice(1, 6);
@@ -56,23 +55,24 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/newsletter", isLoggedIn, (req, res) => {
-  User.findOneAndUpdate(
-    req.session.user._id,
-    { newsletter: true },
-    { new: true }
-  )
-    .then((updatedUser) => {
-      transporter.sendMail({
-        from: '"House of Plants 🌱" <houseofplants.ih@gmail.com>',
-        to: "houseofplants.ih@gmail.com",
-        subject: "🪴 Welcome to House of Plants 🪴",
-        text: "Hello world?",
-        html: newsletterMessage,
-      });
+  if ((req.session.user.newsletter = true)) {
+    res.render("newsletter-true");
+  } else {
+    User.findByIdAndUpdate(req.session.user._id, { newsletter: true })
+      .then((updatedUser) => {
+        console.log(updatedUser);
+        transporter.sendMail({
+          from: '"House of Plants 🌱" <houseofplants.ih@gmail.com>',
+          to: "houseofplants.ih@gmail.com",
+          subject: "🙌 You're on the list 🙌",
+          text: "Hello world?",
+          html: newsletterMessage,
+        });
 
-      res.render("newsletter");
-    })
-    .catch((err) => console.log(err));
+        res.render("newsletter");
+      })
+      .catch((err) => console.log(err));
+  }
 });
 
 module.exports = router;
