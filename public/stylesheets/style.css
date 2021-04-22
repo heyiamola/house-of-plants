@@ -178,9 +178,9 @@ footer {
   font-weight: bolder;
 }
 
-/* .fd-body > section {
+.fd-body > section {
   padding: 10px 25px;
-} */
+}
 
 .fd-plants-container {
   margin: 20px;
@@ -209,7 +209,7 @@ footer {
   text-decoration-thickness: 5px;
 }
 
-.fd-plants-container h2 {
+.fd-body h2 {
   font-size: 30px;
 }
 
@@ -263,6 +263,37 @@ footer {
 .plant-image {
   height: 50px;
   width: 50px;
+}
+
+.newsletter-box {
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50vw;
+}
+
+.newsletter-box > * {
+  margin-bottom: 10px;
+}
+
+.newsletter-box p {
+  padding: 10px 20px;
+  font-size: 20px;
+  font-size: lighter;
+  text-align: center;
+}
+
+.newsletter-box input {
+  height: 20px;
+  width: 250px;
+  margin-bottom: 15px;
+}
+
+.newsletter-box a {
+  font-size: larger;
+  color: black;
 }
 
 .auth-body {
@@ -459,6 +490,13 @@ a:visited {
 .btn-no {
   background-color: salmon;
   border: none;
+}
+
+.btn-general {
+  background-color: khaki;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
 }
 
 /* STYLES FOR PLANT ROUTE */

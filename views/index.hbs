@@ -34,6 +34,16 @@
       {{/each}}
     </div>
   </section>
+  {{#unless isAnonymousUser}}
+  <section class="newsletter-signup">
+    <div class="newsletter-box">
+      <h2 class="underline">Join our newsletter</h2>
+      <p>Every week, we'll be sending you best tips on plant care and news from our community. No spam, we promise!</p>
+      <input type="email" name="newsletter-email" id="newsletter-email">
+      <button type="submit" class="btn-general"><a href="/newsletter">Sign me up</a></button>
+    </div>
+  </section>
+  {{/unless}}
   {{!-- <section class="fd-events-container">
     <h2>Events you might like</h2>
     <p>Meet people, learn new skills, swap plants!</p>
