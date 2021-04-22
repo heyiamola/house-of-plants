@@ -55,7 +55,8 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/newsletter", isLoggedIn, (req, res) => {
-  if ((req.session.user.newsletter = true)) {
+  console.log(req.session.user);
+  if (req.session.user.newsletter === true) {
     res.render("newsletter-true");
   } else {
     User.findByIdAndUpdate(req.session.user._id, { newsletter: true })
@@ -63,7 +64,7 @@ router.get("/newsletter", isLoggedIn, (req, res) => {
         console.log(updatedUser);
         transporter.sendMail({
           from: '"House of Plants 🌱" <houseofplants.ih@gmail.com>',
-          to: "houseofplants.ih@gmail.com",
+          to: updatedUser.email,
           subject: "🙌 You're on the list 🙌",
           text: "Hello world?",
           html: newsletterMessage,

@@ -20,6 +20,7 @@ const { transporter, plantInquiry } = require("../utils/mail");
 // Defaults
 
 const optionPreselected = require("../utils/optionPreselected");
+const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
 const PLANT_GIVEAWAY_EXCHANGE_DEFAULT = "giveaway";
 const PLANT_GROWING_LIGHT_DEFAULT = "don't know";
 const PLANT_GROWING_LOCATION_DEFAULT = "don't know";
@@ -130,13 +131,16 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
   Plant.findById(req.params.plantId)
     .populate("owner")
     .then((foundPlant) => {
+      // console.log(foundPlant.owner._id);
+      // console.log(req.session.user._id);
       let isPlantOwner;
       if (!foundPlant) {
         return res.redirect("/");
       }
-      if ((foundPlant.owner._id = req.session.user._id)) {
+      if (foundPlant.owner._id == req.session.user._id) {
         isPlantOwner = true;
       }
+      // console.log(isPlantOwner);
       const dateTimeFormatted = foundPlant.date.toDateString();
       const dataAvailable = {
         growingLight: !(foundPlant.growingLight === "don't know"),
@@ -144,7 +148,7 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
         growingTemperature: !(foundPlant.growingTemperature === "don't know"),
         growingLocation: !(foundPlant.growingLocation === "don't know"),
       };
-      console.log(dataAvailable.growingLight);
+      // console.log(dataAvailable.growingLight);
       res.render("plant/view", {
         location: JSON.stringify(foundPlant.owner.location),
         foundPlant,
@@ -273,6 +277,27 @@ router.get("/:plantId/delete/confirmed", isLoggedIn, (req, res) => {
       });
     })
     .catch();
+});
+
+router.get("/:plantId/contact", isLoggedIn, (req, res) => {
+  Plant.findById(req.params.plantId)
+    .populate("owner")
+    .then((foundPlant) => {
+      if (!foundPlant) {
+        return res.redirect("/");
+      }
+
+      transporter.sendMail({
+        from: req.session.user.email,
+        to: foundPlant.owner.email,
+        subject: "🌱 You've got mail! 🌱",
+        text: "Hello world?",
+        html: plantInquiry,
+      });
+      console.log(foundPlant);
+      return res.render("plant/plant-inquiry", { foundPlant });
+    })
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
