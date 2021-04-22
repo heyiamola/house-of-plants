@@ -15,6 +15,8 @@ const PLANT_GROWING_LOCATION = require("../utils/consts/plant-growing-location")
 const PLANT_GROWING_TEMPERATURE = require("../utils/consts/plant-growing-temperature");
 const PLANT_GROWING_WATER = require("../utils/consts/plant-growing-water");
 
+const { transporter, plantInquiry } = require("../utils/mail");
+
 // Defaults
 
 const optionPreselected = require("../utils/optionPreselected");
@@ -133,7 +135,7 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
         return res.redirect("/");
       }
       if ((foundPlant.owner._id = req.session.user._id)) {
-        isPlantOwner = false;
+        isPlantOwner = true;
       }
       const dateTimeFormatted = foundPlant.date.toDateString();
       const dataAvailable = {
