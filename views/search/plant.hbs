@@ -67,8 +67,8 @@
         plants</a>
     </div>
   </form>
-  <div class="results-and-filter">
-    <div class="results">
+  <div class="results-and-filter vertical-with-mobile">
+    <section class="results">
       <h2>Results</h2>
       <ul>
         {{#each foundPlants}}
@@ -80,8 +80,8 @@
         </li>
         {{/each}}
       </ul>
-    </div>
-    <div class="filter">
+    </section>
+    <section class="filter">
       <h2>View on map</h2>
       <div id='map' class="map"></div>
       <br>
@@ -91,8 +91,9 @@
         <input type="range" min="0" max="20" value="0" class="slider" id="map-slider">
         <span id="slider-value">Move the slider to select radius</span>
       </div>
-    </div>
+    </section>
   </div>
+</div>
 </div>
 <script>
   const plantLocationStr = `{{{plantLocations}}}`;

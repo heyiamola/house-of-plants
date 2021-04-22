@@ -1,5 +1,5 @@
 <div class="fd-body">
-  <section class="fd-search-container">
+  <header class="fd-search-container">
     <div class="fd-search-content">
       <h1>House of plants</h1>
       <h2>Swap plants, seedlings and more. Create your own urban jungle.</h2>
@@ -10,15 +10,15 @@
         </button> --}}
       </div>
     </div>
-  </section>
+  </header>
   <section class="fd-plants-container">
     {{#if isAnonymousUser}}
-    <header>
+    <header class="vertical-with-mobile">
       <h2>Plants for grabs in <span class="underline">Berlin</span></h2>
       <a href="/search/plant">See all plants in Berlin</a>
     </header>
     {{else}}
-    <header>
+    <header class="vertical-with-mobile">
       <h2>Plants for grabs in <span class="underline">{{userLocation}}</span></h2>
       <a href="/search/plant">See all plants in {{userLocation}}</a>
     </header>

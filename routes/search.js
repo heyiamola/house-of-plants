@@ -29,7 +29,7 @@ router.get("/plant", (req, res) => {
       } else {
         userLocation = JSON.stringify(req.session.user.location.coordinates);
       }
-      console.log(userLocation);
+      // console.log(userLocation);
 
       res.render("search/plant", {
         foundPlants,

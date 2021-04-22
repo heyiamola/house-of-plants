@@ -1,0 +1,14 @@
+@media (max-width: 730px) {
+  .hide-with-mobile {
+    display: none;
+  }
+
+  .vertical-with-mobile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+header h2 {
+  padding: 0px 25px;
+}
