@@ -102,6 +102,7 @@ router.post("/add", isLoggedIn, parser.single("plant-image"), (req, res) => {
     ...body,
     owner: req.session.user._id,
     date: new Date(),
+    berlinBorough: req.session.user.berlinBorough,
   })
     .then((createdPlant) => {
       console.log(createdPlant);

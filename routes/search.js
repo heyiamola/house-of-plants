@@ -85,7 +85,6 @@ router.post("/plant", (req, res) => {
   } else {
     userLocation = JSON.stringify(req.session.user.location.coordinates);
   }
-  console.log(userLocation);
 
   Plant.find(filter)
     .populate("owner")

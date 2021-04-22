@@ -100,6 +100,15 @@ const plantSchema = new Schema({
     type: Number,
     description: "The diameter of the plant pot in centimeters.",
   },
+  berlinBorough: {
+    type: String,
+    required: true,
+    default: "Mitte",
+    enum: BERLIN_BOROUGHS,
+    description:
+      "The plant borough in Berlin, taken as the user borough on plant add",
+  },
+
   date: { type: Date, required: true },
 });
 
