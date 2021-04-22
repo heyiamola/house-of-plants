@@ -1,5 +1,4 @@
 const nodemailer = require("nodemailer");
-require("dotenv").config();
 
 const EMAIL_PASSWORD = process.env.EMAIL_PASSWORD;
 
@@ -196,10 +195,17 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.sendMail({
-  from: '"House of Plants 🌱" <houseofplants.ih@gmail.com>',
-  to: "houseofplants.ih@gmail.com",
-  subject: "🪴 Welcome to House of Plants 🪴",
-  text: "Hello world?",
-  html: welcomeMessage,
-});
+// transporter.sendMail({
+//   from: '"House of Plants 🌱" <houseofplants.ih@gmail.com>',
+//   to: "houseofplants.ih@gmail.com",
+//   subject: "🪴 Welcome to House of Plants 🪴",
+//   text: "Hello world?",
+//   html: welcomeMessage,
+// });
+
+module.exports = {
+  transporter,
+  welcomeMessage,
+  newsletterMessage,
+  plantInquiry,
+};

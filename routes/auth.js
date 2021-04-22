@@ -12,8 +12,7 @@ const User = require("../models/User.model");
 
 const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
 
-const transporter = require("../public/js/mail");
-const welcomeMessage = require("../public/js/mail");
+const { transporter, welcomeMessage } = require("../utils/mail");
 
 // Require necessary middlewares in order to control access to specific routes
 const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
@@ -110,7 +109,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
           password: hashedPassword,
           email,
           name,
-          berlinBorough: location,
+          berlinBorough,
           location: {
             type: "Point",
             coordinates: [longitude, latitude],
