@@ -12,6 +12,9 @@ const User = require("../models/User.model");
 
 const BERLIN_BOROUGHS = require("../utils/consts/berlin-boroughs.js");
 
+const transporter = require("../public/js/mail");
+const welcomeMessage = require("../public/js/mail");
+
 // Require necessary middlewares in order to control access to specific routes
 const shouldNotBeLoggedIn = require("../middlewares/shouldNotBeLoggedIn");
 const isLoggedIn = require("../middlewares/isLoggedIn");
@@ -118,6 +121,15 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
       .then((user) => {
         // Bind the user to the session object
         req.session.user = user;
+
+        transporter.sendMail({
+          from: '"House of Plants 🌱" <houseofplants.ih@gmail.com>',
+          to: "houseofplants.ih@gmail.com",
+          subject: "🪴 Welcome to House of Plants 🪴",
+          text: "Hello world?",
+          html: welcomeMessage,
+        });
+
         res.redirect("/");
       })
       .catch((error) => {
