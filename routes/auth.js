@@ -124,7 +124,7 @@ router.post("/signup", shouldNotBeLoggedIn, (req, res) => {
 
         transporter.sendMail({
           from: '"House of Plants 🌱" <houseofplants.ih@gmail.com>',
-          to: "houseofplants.ih@gmail.com",
+          to: user.email,
           subject: "🪴 Welcome to House of Plants 🪴",
           text: "Hello world?",
           html: welcomeMessage,
