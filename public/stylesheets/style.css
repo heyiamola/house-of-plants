@@ -28,6 +28,7 @@ ul {
 }
 
 a {
+  color: inherit;
   text-decoration: none;
 }
 
@@ -165,8 +166,8 @@ footer {
 }
 
 .fd-buttons button {
-  width: 150px;
-  height: 40px;
+  width: 200px;
+  height: 50px;
   margin: 15px;
   border-color: #6b824a;
   border-radius: 5px;
@@ -175,7 +176,8 @@ footer {
 
 .fd-buttons a {
   color: black;
-  font-weight: bolder;
+  font-weight: lighter;
+  font-size: 22px;
 }
 
 .fd-body > section {
@@ -250,6 +252,12 @@ footer {
 
 .label-gone {
   background-color: lightcoral;
+  padding: 2px 3px;
+  border-radius: 5px;
+}
+
+.label-giveaway {
+  background-color: mediumaquamarine;
   padding: 2px 3px;
   border-radius: 5px;
 }
@@ -450,6 +458,13 @@ footer {
 .bigger-input {
   min-width: 350px;
   min-height: 100px;
+}
+
+.user-map {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .delete-dialog {

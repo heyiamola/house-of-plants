@@ -18,16 +18,62 @@
   display: flex;
   width: 80vw;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.plant-header > * {
+  padding: 5px 0;
+}
+
+.plant-header h3 {
+  font-weight: 200;
+  font-size: larger;
+}
+
+.plant-main-container {
+  display: flex;
+  padding: 15px 0;
   justify-content: space-between;
 }
 
+.plant-view-left {
+  max-width: 180px;
+}
+
 .plant-view-image {
-  /* max-height: 150px; */
-  max-width: 150px;
+  height: 150px;
+  width: 150px;
+  border-radius: 50%;
+}
+
+.plant-labels {
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.pd-plant-description > * {
+  padding: 5px 0;
+}
+
+.pd-plant-growing-info {
+  width: 450px;
+}
+
+.pd-plant-growing-info > * {
+  padding-bottom: 10px;
+}
+
+.plant-view-right {
+  max-width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .plant-view-map {
-  width: 250px;
+  width: 200px;
   height: 150px;
   margin: 10px;
 }
@@ -35,15 +81,31 @@
 .plant-user-info {
   display: flex;
   align-items: center;
-  /* width: 100%; */
   padding: 5px;
-  margin: 5px;
+  margin-bottom: 10px;
+  width: 100%;
   box-shadow: 5px 5px 10px lightgray;
 }
 
 .plant-user-info img {
   max-height: 50px;
   padding: 5px;
+}
+
+.plant-view-buttons {
+  margin: auto;
+  max-width: 20%;
+}
+
+.plant-view-buttons button {
+  padding: 10px;
+  border-radius: 5%;
+  margin: 15px;
+}
+
+.plant-view-buttons a {
+  font-weight: 300;
+  font-size: 16px;
 }
 
 /* STYLES FOR PLANT ROUTE */

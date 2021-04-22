@@ -1,17 +1,23 @@
 <div class="plant-body">
-  <div>
-    <h1>{{foundPlant.commonName}}</h1>
+  <header class="plant-header">
+    <h1 class="underline">{{foundPlant.commonName}}</h1>
     {{#if foundPlant.botanicalName}}
-    <h3>{{foundPlant.botanicalName}}</h3>
+    <h3><i>{{foundPlant.botanicalName}}</i></h3>
     {{/if}}
-    <img src="{{foundPlant.picture}}" alt="Picture of {{foundPlant.commonName}}" class="plant-view-image">
-    <span class="label-available">{{foundPlant.availability}}</span>
-    <p>{{foundPlant.giveawayOrExchange}}</p>
-
-    <div class="pd-plant-description">
-      <h2>Description</h2>
-      <p>{{foundPlant.description}}</p>
+  </header>
+  <div class="plant-main-container">
+    <div class="plant-view-left">
+      <img src="{{foundPlant.picture}}" alt="Picture of {{foundPlant.commonName}}" class="plant-view-image">
+      <div class="plant-labels">
+        <span class="label-{{foundPlant.availability}}">{{foundPlant.availability}}</span>
+        <span class="label-giveaway">{{foundPlant.giveawayOrExchange}}</span>
+      </div>
+      <div class="pd-plant-description">
+        <h2>Description</h2>
+        <p>{{foundPlant.description}}</p>
+      </div>
     </div>
+
 
     <div class="pd-plant-growing-info">
       <h2>Growing info</h2>
@@ -41,31 +47,34 @@
         </tr>
         {{/if}}
       </table>
-      <h3>Growing notes</h3>
+      <h2>Growing notes</h2>
       <p>{{foundPlant.growingNotes}}</p>
-      <h2>Other info.</h2>
+      <h2>Other info</h2>
       <p>Height: {{foundPlant.heightOrLength}} cm</p>
       <p>Pot diameter: {{foundPlant.potDiameter}} cm</p>
     </div>
+
+    <div class="plant-view-right">
+      <a href="/profile/{{foundPlant.owner.username}}">
+        <div class="plant-user-info">
+          <img src="{{foundPlant.owner.profilePicture}}" alt="Profile picture for user {{foundPlant.owner.username}}">
+          <p>Posted by {{foundPlant.owner.username}} <br>on {{dateTimeFormatted}}</p>
+        </div>
+      </a>
+      <br>
+      <p>Location: <span class="label-borough">{{foundPlant.owner.berlinBorough}}</span></p>
+      <div id='map' class="plant-view-map"></div>
+    </div>
   </div>
-
-  <div class="plant-view-right">
-    <a href="/profile/{{foundPlant.owner.username}}">
-
-      <div class="plant-user-info">
-        <img src="{{foundPlant.owner.profilePicture}}" alt="Profile picture for user {{foundPlant.owner.username}}">
-        <p>Posted by {{foundPlant.owner.username}} <br>on {{dateTimeFormatted}}</p>
-      </div>
-    </a>
-    <p>Location: {{foundPlant.owner.berlinBorough}}</p>
-    <div id='map' class="plant-view-map"></div>
-
+  <div class="plant-view-buttons">
     {{#if isPlantOwner}}
-    <button type="submit"><a href="/plant/{{foundPlant._id}}/edit">Edit plant</a></button>
+    <button type="submit" class="btn-yes"><a href="/plant/{{foundPlant._id}}/edit">Edit plant</a></button>
     {{else}}
-    <button type="submit"><a href="/plant/{{foundPlant._id}}/contact">Contact user</a></button>
+    <button type="submit" class="btn-general"><a href="/plant/{{foundPlant._id}}/contact">Contact user</a></button>
     {{/if}}
   </div>
+
+
 </div>
 <script>
   const locationStr = `{{{location}}}`;
