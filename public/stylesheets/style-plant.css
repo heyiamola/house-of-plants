@@ -38,6 +38,9 @@
 
 .plant-view-left {
   max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .plant-view-image {
@@ -47,6 +50,7 @@
 }
 
 .plant-labels {
+  min-width: 150px;
   padding: 10px 0;
   display: flex;
   justify-content: space-around;

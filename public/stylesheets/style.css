@@ -412,6 +412,7 @@ footer {
 .short-bio {
   width: 55vw;
   padding: 15px;
+  text-align: center;
 }
 
 .users-items {
