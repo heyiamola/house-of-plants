@@ -307,10 +307,10 @@ footer {
 }
 
 .auth-body {
+  padding: 25px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 20px;
 }
 
 .auth-body h2 {
