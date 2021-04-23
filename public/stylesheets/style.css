@@ -73,6 +73,8 @@ a:active {
 
 .nav-dropdown-menu {
   display: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
 .nav-dropdown-menu li {
