@@ -17,6 +17,10 @@
   background-color: #6b824a;
 }
 
+.search-button a {
+  font-weight: bolder;
+}
+
 .search-form {
   padding: 50px;
   margin: 0 auto;
@@ -27,8 +31,18 @@
 
 .search-fields {
   margin: 0 auto;
-
   display: flex;
+  font-size: 20px;
+}
+
+.search-fields input {
+  font-size: 20px;
+  margin: 0 5px;
+}
+
+.search-fields select {
+  font-size: 20px;
+  margin: 0 5px;
 }
 
 .search-card-plant {
@@ -53,4 +67,22 @@
 .results ul {
   display: flex;
   flex-wrap: wrap;
+}
+
+.results h2 {
+  padding: 0 0 15px 10px;
+}
+
+.filter h2 {
+  padding: 0 0 15px 10px;
+}
+
+#slidecontainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#slidecontainer h3 {
+  padding: 10px 0;
 }
