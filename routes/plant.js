@@ -148,6 +148,47 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
         growingTemperature: !(foundPlant.growingTemperature === "don't know"),
         growingLocation: !(foundPlant.growingLocation === "don't know"),
       };
+      //Calculate URL for icons:
+      let foundPlantLightIcon = false;
+      if (foundPlant.growingLight === "direct sun") {
+        foundPlantLightIcon = "/images/icons/i_direct_sun.svg";
+      }
+      if (foundPlant.growingLight === "half shade") {
+        foundPlantLightIcon = "/images/icons/i_half_shade.svg";
+      }
+      if (foundPlant.growingLight === "full shade") {
+        foundPlantLightIcon = "/images/icons/i_full_shade.svg";
+      }
+      let foundPlantWaterIcon = false;
+      if (foundPlant.growingWater === "regular") {
+        foundPlantWaterIcon = "/images/icons/i_water_regular.svg";
+      }
+      if (foundPlant.growingWater === "average") {
+        foundPlantWaterIcon = "/images/icons/i_water_average.svg";
+      }
+      if (foundPlant.growingWater === "low") {
+        foundPlantWaterIcon = "/images/icons/i_water_low.svg";
+      }
+      let foundPlantTemperatureIcon = false;
+      if (foundPlant.growingTemperature === "hot") {
+        foundPlantTemperatureIcon = "/images/icons/i_temperature_hot.svg";
+      }
+      if (foundPlant.growingTemperature === "average") {
+        foundPlantTemperatureIcon = "/images/icons/i_temperature_average.svg";
+      }
+      if (foundPlant.growingTemperature === "cold") {
+        foundPlantTemperatureIcon = "/images/icons/i_temperature_cold.svg";
+      }
+      let foundPlantLocationIcon = false;
+      if (foundPlant.growingLocation === "inside") {
+        foundPlantLocationIcon = "/images/icons/i_location_inside.svg";
+      }
+      if (foundPlant.growingLocation === "outside during summer") {
+        foundPlantLocationIcon = "/images/icons/i_location_outside_summer.svg";
+      }
+      if (foundPlant.growingLocation === "outside") {
+        foundPlantLocationIcon = "/images/icons/i_location_outside.svg";
+      }
       // console.log(dataAvailable.growingLight);
       res.render("plant/view", {
         location: JSON.stringify(foundPlant.owner.location),
@@ -156,6 +197,10 @@ router.get("/view/:plantId", isLoggedIn, (req, res) => {
         isPlantOwner,
         containsMap: true,
         dataAvailable,
+        foundPlantLightIcon,
+        foundPlantWaterIcon,
+        foundPlantTemperatureIcon,
+        foundPlantLocationIcon,
       });
     })
     .catch((err) => console.log(err));

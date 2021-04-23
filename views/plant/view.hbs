@@ -24,26 +24,38 @@
       <table>
         {{#if dataAvailable.growingLight}}
         <tr>
-          <td>Light</td>
-          <td>{{foundPlant.growingLight}}</td>
+          {{#if foundPlantLightIcon}}
+          <th><img src="{{foundPlantLightIcon}}" height="40px" alt=""></th>
+          {{/if}}
+          <th>Light</th>
+          <th>{{foundPlant.growingLight}}</th>
         </tr>
         {{/if}}
         {{#if dataAvailable.growingWater}}
         <tr>
-          <td>Water</td>
-          <td>{{foundPlant.growingWater}}</td>
+          {{#if foundPlantWaterIcon}}
+          <th><img src="{{foundPlantWaterIcon}}" height="40px" alt=""></th>
+          {{/if}}
+          <th>Water</th>
+          <th>{{foundPlant.growingWater}}</th>
         </tr>
         {{/if}}
         {{#if dataAvailable.growingTemperature}}
         <tr>
-          <td>Temperature</td>
-          <td>{{foundPlant.growingTemperature}}</td>
+          {{#if foundPlantWaterIcon}}
+          <th><img src="{{foundPlantTemperatureIcon}}" height="40px" alt=""></th>
+          {{/if}}
+          <th>Temperature</th>
+          <th>{{foundPlant.growingTemperature}}</th>
         </tr>
         {{/if}}
         {{#if dataAvailable.growingLocation}}
         <tr>
-          <td>Plant location</td>
-          <td>{{foundPlant.growingLocation}}</td>
+          {{#if foundPlantLocationIcon}}
+          <th><img src="{{foundPlantLocationIcon}}" height="40px" alt=""></th>
+          {{/if}}
+          <th>Plant location</th>
+          <th>{{foundPlant.growingLocation}}</th>
         </tr>
         {{/if}}
       </table>
