@@ -1,9 +1,9 @@
 <div class="profile-body">
 
-  <h1>Search for plant names</h1>
+  <h1 class="underline">Plant finder</h1>
   <form class="search-form" action="/lookup" method="POST">
     <div class="search-fields">
-      <label> Look up plant:
+      <label> Search for plant names:
         <input type="text" name="commonName" id="commonName" placeholder="Type plant name">
       </label>
 
@@ -17,7 +17,7 @@
 
   <section class="results">
     <h2 class="results">Search results</h2>
-    <ul>
+    <ul class="plant-finder-results">
       {{#each returnedPlant}}
       <li class="search-card-plant">
         <img src="{{this.image_url}}" height="300" alt="">
