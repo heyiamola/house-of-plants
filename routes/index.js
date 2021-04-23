@@ -34,7 +34,7 @@ router.get("/", (req, res, next) => {
       .then((foundPlants) => {
         return foundPlants
           .filter((plant) => plant.berlinBorough === userLocation)
-          .slice(1, 6);
+          .slice(0, 5);
       })
       .then((plantsInTheArea) => {
         isAnonymousUser = false;
@@ -44,7 +44,7 @@ router.get("/", (req, res, next) => {
   } else {
     Plant.find({})
       .then((foundPlants) => {
-        return foundPlants.slice(1, 6);
+        return foundPlants.slice(0, 5);
       })
       .then((plantsInTheArea) => {
         isAnonymousUser = true;
