@@ -10,7 +10,6 @@
     </div>
 
     <button class="search-button" type="submit">Look up</button>
-    <br>
     <p> Powered by <a href="https://trefle.io/">trefle.io</a></p>
 
   </form>
@@ -20,7 +19,7 @@
     <ul class="plant-finder-results">
       {{#each returnedPlant}}
       <li class="search-card-plant">
-        <img src="{{this.image_url}}" height="300" alt="">
+        <a href="https://trefle.io/explore/species/{{this.slug}}"><img src="{{this.image_url}}" height="300" alt=""></a>
         <b>{{this.common_name}}</b>
         <i>{{this.scientific_name}}</i>
       </li>
