@@ -1,8 +1,7 @@
 .logo-nav-img {
   width: 70px;
-  padding: 5px 10px;
   position: absolute;
-  left: 0px;
+  left: calc(50vw - 35px);
   top: 0px;
   float: right;
   filter: drop-shadow(5px lightgrey);
@@ -10,7 +9,7 @@
 }
 
 .nav-bar-left-text {
-  margin: 80px;
+  margin: 0 20px;
 }
 
 .plant-body {
